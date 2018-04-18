@@ -3,7 +3,7 @@ package es.upm.dit.isst.pcg.model;
 import java.io.Serializable;
 
 import javax.persistence.*;
-
+//Esta clase representa la entidad Pensamiento que puede escribir cada usuario.
 @Entity
 public class Pensamiento implements Serializable{
 	
