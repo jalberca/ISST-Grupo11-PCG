@@ -16,7 +16,8 @@ public class Usuario implements Serializable{
 	private int id;
 	private String email;
 	private String token;
-	
+	private String typeUser;
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //OJITO A ESTO QUE LO DE USER ME LO HE INVENTADO
 	private List<Pensamiento> misPensamientos;
 	
@@ -46,6 +47,15 @@ public class Usuario implements Serializable{
 	
 	public void setToken(String token) {
 		this.token=token;
+	}
+	
+	// ESPE: debemos añadir esto para saber si somos admin o no, nu?
+	public String getTypeUser() {
+		return this.typeUser;
+	}
+	
+	public void setTypeUser(String typeUser) {
+		this.typeUser=typeUser;
 	}
 
 }
