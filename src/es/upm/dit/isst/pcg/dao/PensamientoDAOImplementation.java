@@ -157,7 +157,7 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		Session session = SessionFactoryService.get().openSession();
 		String fecha = null;
 		try {
-			fecha = (String) session.createQuery("select t.votosNegativo from Pensamiento t where t.id = :id")
+			fecha = (String) session.createQuery("select t.fecha from Pensamiento t where t.id = :id")
 			.setParameter("id", pensamiento.getDate())
 			.uniqueResult();
 		}catch(Exception e) {
@@ -166,5 +166,21 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 			session.close();
 		}
 		return fecha;
+	}
+	
+	@Override
+	public String textoPensamiento(Pensamiento pensamiento) {
+		Session session = SessionFactoryService.get().openSession();
+		String texto = null;
+		try {
+			texto = (String) session.createQuery("select t.texto from Pensamiento t where t.id = :id")
+			.setParameter("id", pensamiento.getDate())
+			.uniqueResult();
+		}catch(Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return texto;
 	}
 }

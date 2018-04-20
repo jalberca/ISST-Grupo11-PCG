@@ -10,19 +10,27 @@ import es.upm.dit.isst.pcg.dao.SessionFactoryService;
 
 
 public class UsuarioDAOImplementation implements UsuarioDAO {
+	
+	public static UsuarioDAOImplementation instance;
+	private UsuarioDAOImplementation() { }
+	public static UsuarioDAOImplementation getInstance() {
+		if ( null == instance )
+			instance = new UsuarioDAOImplementation();
+		return instance;
+	}
 
 	// SIENDO SINCERA NO TENGO NI IDEA DE SI ESTO ESTÁ BIEN 
 	// De hecho estoy casi segura de que está mal, porque usaremos el Oauth y eso saes
 	// pero lo dejo aquí para modificarlo cuando toque
 	@Override
-	public Usuario loginUser(String email, String password) {
+	public Usuario loginUser(String email, String token) {
 		Session session = SessionFactoryService.get().openSession();
 		Usuario user = null;
 		try {
 			user = (Usuario) session
-			        .createQuery("select p from Usuario p where p.email= :email and p.password = :password")
+			        .createQuery("select p from Usuario p where p.email= :email and p.token = :token")
 			        .setParameter("email", email)
-			        .setParameter("password", password)
+			        .setParameter("token", token)
 			        .uniqueResult();		
 		}catch(Exception e) {
 			

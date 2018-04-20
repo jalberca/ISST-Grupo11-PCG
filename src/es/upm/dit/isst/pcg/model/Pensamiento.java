@@ -14,6 +14,7 @@ public class Pensamiento implements Serializable{
 	private double latitud;
 	private double longitud;
 	private String date;
+	private String text;
 	private int votosPositivo;
 	private int votosNegativo;
 	
@@ -46,6 +47,13 @@ public class Pensamiento implements Serializable{
 	}
 	public void setDate(String date) {
 		this.date=date;
+	}
+	
+	public String getText() {
+		return this.text;
+	}
+	public void setText(String texto) {
+		this.text=texto;
 	}
 	
 	public int getPositivos() {

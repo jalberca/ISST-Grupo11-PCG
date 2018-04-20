@@ -32,6 +32,9 @@ public interface PensamientoDAO {
 	
 	// Para obtener la fecha jeje
 	public String fechaPensamiento( Pensamiento pensamiento);
+	
+	//Para obtener el texto
+	public String textoPensamiento(Pensamiento pensamiento);
 
 	
 }
