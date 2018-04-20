@@ -19,6 +19,8 @@ public class Pensamiento implements Serializable{
 	private int votosNegativo;
 	
 	public Pensamiento() {
+		this.votosNegativo=0;
+		this.votosPositivo=0;
 	}
 	
 	public int getId() {
@@ -49,6 +51,13 @@ public class Pensamiento implements Serializable{
 		this.date=date;
 	}
 	
+	public Usuario getUser() {
+		return this.user;
+	}
+	public void setUser(Usuario user) {
+		this.user=user;
+	}
+	
 	public String getText() {
 		return this.text;
 	}
@@ -56,10 +65,10 @@ public class Pensamiento implements Serializable{
 		this.text=texto;
 	}
 	
-	public int getPositivos() {
+	public int getVotosPositivo() {
 		return this.votosPositivo;
 	}
-	public int getNegativos() {
+	public int getVotosNegativo() {
 		return this.votosNegativo;
 	}
 	public void voteUP() {
