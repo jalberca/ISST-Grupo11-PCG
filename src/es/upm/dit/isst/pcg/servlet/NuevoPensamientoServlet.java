@@ -3,6 +3,7 @@ package es.upm.dit.isst.pcg.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,14 +22,24 @@ public class NuevoPensamientoServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
 		String text = req.getParameter("text");
+		String statusLoc = req.getParameter("status");
+		float latitud = Float.parseFloat(req.getParameter("latitud"));
+		float longitud = Float.parseFloat(req.getParameter("longitud"));
+		
+		if(statusLoc == "1" || statusLoc == "2") {
+			return;
+		}
+		
+		List<Pensamiento> todosPensamientos = PensamientoDAOImplementation.getInstance().readPensamientos();
+		
 
 		String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		
 		Pensamiento pensamiento = new Pensamiento();
 		pensamiento.setDate(date);
-		pensamiento.setId(5);
-		pensamiento.setLatitud(40.4893538);
-		pensamiento.setLongitud(-3.6827461);
+		pensamiento.setId(todosPensamientos.size()+1);
+		pensamiento.setLatitud(latitud);
+		pensamiento.setLongitud(longitud);
 		pensamiento.setText(text);
 		pensamiento.setUser(user);
 		

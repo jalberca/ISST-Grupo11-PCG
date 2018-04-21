@@ -14,7 +14,8 @@
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
-<body class="w3-theme-l5">
+
+<body class="w3-theme-l5" onLoad="">
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -58,10 +59,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	          <div class="w3-card w3-round w3-white">
 	            <div class="w3-container w3-padding">
 	              <h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
-	               
-	               	<form action="BotonPublicarServlet">
-						<input type="hidden" name="user.email" value="${user.email }"/>
-						<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Nuevo Pensamiento</button>
+	              
+	              <form action="NuevoPensamientoServlet">
+	              		<input type="hidden" id="status" name="status" value="">
+	              		<input type="hidden" id="latitud" name="latitud" value="">
+	              		<input type="hidden" id="longitud" name="longitud" value="">
+						<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:500px;height:100px;"></textarea>
+						<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
 					</form>
 	
 	
@@ -104,6 +108,52 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <footer class="w3-container w3-theme-d5">
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer> 
+</footer>
+
+<script type="text/javascript">
+var status = document.getElementById("status");
+var lat = document.getElementById("latitud");
+var log = document.getElementById("longitud");
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(setPosition, getError);
+        console.log("hola");
+    } else { 
+    	alert("ERROR\nPor favor, acepte el uso de la geolocalización y recarge la página");
+    }
+
+function setPosition(position, error) {
+	console.log("wey: " + position.coords.latitude);
+	
+    lat.value = position.coords.latitude;
+    log.value = position.coords.longitude;
+    status.value = 0;
+    console.log(lat);
+    console.log(lat.value);
+}
+
+function getError(error){
+	switch(error.code) {
+    case error.PERMISSION_DENIED:
+    	status.value=1;
+    	alert("ERROR\nPermita a su navegador utilizar la localización y vuelva a iniciar sesión");
+        break;
+    case error.POSITION_UNAVAILABLE:
+    	status.value=2;
+    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
+        break;
+    case error.TIMEOUT:
+    	status.value=2;
+    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
+        break;
+    case error.UNKNOWN_ERROR:
+    	status.value=2;
+    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
+        break;
+	}
+}
+</script>
+
+
 </body>
 </html>

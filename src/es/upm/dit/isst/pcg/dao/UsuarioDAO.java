@@ -9,7 +9,7 @@ public interface UsuarioDAO {
 	public Usuario loginUser( String email, String password );
 
 	// Necesitamos leer todos los usuarios en algún momento????
-	public List<Usuario> readAlUsers( );
+	public List<Usuario> readAllUsers( );
 
 	// Métodos también lógicos
 	public void createUsuario( Usuario user );

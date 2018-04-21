@@ -43,7 +43,7 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 	
 	// Necesitamos leer todos los users en algún momentoo?????!?
 	@Override
-	public List<Usuario> readAlUsers() {
+	public List<Usuario> readAllUsers() {
 		Session session = SessionFactoryService.get().openSession();
 		List<Usuario> users = new ArrayList<>();
 		try {

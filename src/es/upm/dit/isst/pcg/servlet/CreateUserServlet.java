@@ -1,6 +1,7 @@
 package es.upm.dit.isst.pcg.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +20,13 @@ public class CreateUserServlet extends HttpServlet{
 		String email = req.getParameter("email");
 		String token = req.getParameter("token");
 		
+		List<Usuario> todosUsuarios = UsuarioDAOImplementation.getInstance().readAllUsers();
+		
 		Usuario user = new Usuario();
 		user.setEmail(email);
 		user.setToken(token);
 		user.setTypeUser("user");
-		user.setID(1);
+		user.setID(todosUsuarios.size()+1);
 		UsuarioDAOImplementation.getInstance().createUsuario(user);
 		
 		resp.sendRedirect(req.getContextPath() +"/LoginInicial.jsp");

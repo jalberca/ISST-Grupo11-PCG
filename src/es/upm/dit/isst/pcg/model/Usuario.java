@@ -56,6 +56,7 @@ public class Usuario implements Serializable{
 	}
 	
 	public List<Pensamiento> getMisPensamientos(){
+		
 		return this.misPensamientos;
 	}
 
