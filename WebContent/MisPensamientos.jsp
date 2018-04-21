@@ -64,6 +64,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	              		<input type="hidden" id="status" name="status" value="">
 	              		<input type="hidden" id="latitud" name="latitud" value="">
 	              		<input type="hidden" id="longitud" name="longitud" value="">
+	              		<input type="hidden" name="email" value="${user.email }">
 						<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:500px;height:100px;"></textarea>
 						<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
 					</form>

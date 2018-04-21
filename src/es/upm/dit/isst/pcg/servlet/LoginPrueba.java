@@ -27,9 +27,8 @@ public class LoginPrueba extends HttpServlet{
 		//se podria hacer un if para ver si es un administrador
 		req.getSession().setAttribute("user", user);
 		//req.getSession().setAttribute(arg0, arg1);
+		
 		resp.sendRedirect(req.getContextPath() + "/MisPensamientos.jsp");
-		} else {
-			resp.sendRedirect(req.getContextPath() + "/LoginInicial.jsp");
 		}
 		
 	}

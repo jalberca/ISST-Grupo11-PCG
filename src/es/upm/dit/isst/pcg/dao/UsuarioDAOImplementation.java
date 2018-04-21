@@ -94,7 +94,7 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			session.save(user);
+			session.saveOrUpdate(user);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 		} finally {

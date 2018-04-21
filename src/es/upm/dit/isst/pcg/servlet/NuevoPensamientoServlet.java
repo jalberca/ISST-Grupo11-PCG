@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.isst.pcg.dao.PensamientoDAOImplementation;
+import es.upm.dit.isst.pcg.dao.UsuarioDAOImplementation;
 import es.upm.dit.isst.pcg.model.Pensamiento;
 import es.upm.dit.isst.pcg.model.Usuario;
 
@@ -23,6 +24,8 @@ public class NuevoPensamientoServlet extends HttpServlet{
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
 		String text = req.getParameter("text");
 		String statusLoc = req.getParameter("status");
+		String email = req.getParameter("email");
+		user.setEmail(email);
 		float latitud = Float.parseFloat(req.getParameter("latitud"));
 		float longitud = Float.parseFloat(req.getParameter("longitud"));
 		
@@ -44,7 +47,9 @@ public class NuevoPensamientoServlet extends HttpServlet{
 		pensamiento.setUser(user);
 		
 		PensamientoDAOImplementation.getInstance().createPensamiento(pensamiento);
-		resp.sendRedirect(req.getContextPath()+ "/MisPensamientos.jsp");
+	
+		req.getSession().setAttribute("user", user);
+		resp.sendRedirect(req.getContextPath()+ "/LoginPrueba?email="+user.getEmail()+"&token="+user.getToken());
 	}
 	
 }
