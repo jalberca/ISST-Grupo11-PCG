@@ -61,7 +61,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	              <h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
 	              
 	              <form action="NuevoPensamientoServlet">
-	              		<input type="hidden" id="status" name="status" value="">
+	              		<input type="hidden" id="estado" name="status" value="">
 	              		<input type="hidden" id="latitud" name="latitud" value="">
 	              		<input type="hidden" id="longitud" name="longitud" value="">
 	              		<input type="hidden" name="email" value="${user.email }">
@@ -112,7 +112,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </footer>
 
 <script type="text/javascript">
-var status = document.getElementById("status");
+var estado = document.getElementById("estado");
 var lat = document.getElementById("latitud");
 var log = document.getElementById("longitud");
 
@@ -128,30 +128,28 @@ function setPosition(position, error) {
 	
     lat.value = position.coords.latitude;
     log.value = position.coords.longitude;
-    status.value = 0;
+    estado.value = 0;
     console.log(lat);
     console.log(lat.value);
+    console.log(estado.value);
 }
 
 function getError(error){
 	switch(error.code) {
     case error.PERMISSION_DENIED:
-    	status.value=1;
-    	alert("ERROR\nPermita a su navegador utilizar la localización y vuelva a iniciar sesión");
+    	estado.value=1;
         break;
     case error.POSITION_UNAVAILABLE:
     	status.value=2;
-    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
         break;
     case error.TIMEOUT:
-    	status.value=2;
-    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
+    	status.value="2";
         break;
     case error.UNKNOWN_ERROR:
     	status.value=2;
-    	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
         break;
 	}
+	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
 }
 </script>
 

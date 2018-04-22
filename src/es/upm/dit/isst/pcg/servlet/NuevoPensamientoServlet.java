@@ -24,32 +24,32 @@ public class NuevoPensamientoServlet extends HttpServlet{
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
 		String text = req.getParameter("text");
 		String statusLoc = req.getParameter("status");
-		String email = req.getParameter("email");
-		user.setEmail(email);
-		float latitud = Float.parseFloat(req.getParameter("latitud"));
-		float longitud = Float.parseFloat(req.getParameter("longitud"));
-		
-		if(statusLoc == "1" || statusLoc == "2") {
-			return;
-		}
-		
-		List<Pensamiento> todosPensamientos = PensamientoDAOImplementation.getInstance().readPensamientos();
-		
-
-		String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-		
-		Pensamiento pensamiento = new Pensamiento();
-		pensamiento.setDate(date);
-		pensamiento.setId(todosPensamientos.size()+1);
-		pensamiento.setLatitud(latitud);
-		pensamiento.setLongitud(longitud);
-		pensamiento.setText(text);
-		pensamiento.setUser(user);
-		
-		PensamientoDAOImplementation.getInstance().createPensamiento(pensamiento);
+		System.out.print("Hola:"+statusLoc);
+		if(statusLoc == "1" || statusLoc == "2" || statusLoc == "") {
+			resp.sendRedirect(req.getContextPath()+ "/LoginOAuth?email="+user.getEmail()+"&token="+user.getToken());
+		} else if (statusLoc != "") {
+			float latitud = Float.parseFloat(req.getParameter("latitud"));
+			float longitud = Float.parseFloat(req.getParameter("longitud"));
+			
+			
+			List<Pensamiento> todosPensamientos = PensamientoDAOImplementation.getInstance().readPensamientos();
+			
 	
-		req.getSession().setAttribute("user", user);
-		resp.sendRedirect(req.getContextPath()+ "/LoginPrueba?email="+user.getEmail()+"&token="+user.getToken());
+			String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+			
+			Pensamiento pensamiento = new Pensamiento();
+			pensamiento.setDate(date);
+			pensamiento.setId(todosPensamientos.size()+1);
+			pensamiento.setLatitud(latitud);
+			pensamiento.setLongitud(longitud);
+			pensamiento.setText(text);
+			pensamiento.setUser(user);
+			
+			PensamientoDAOImplementation.getInstance().createPensamiento(pensamiento);
+		
+			req.getSession().setAttribute("user", user);
+			resp.sendRedirect(req.getContextPath()+ "/LoginOAuth?email="+user.getEmail()+"&token="+user.getToken());
+		}
 	}
 	
 }
