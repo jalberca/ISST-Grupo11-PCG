@@ -76,9 +76,9 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		}
 		return pensamientos;
 	}
-
+	
 	@Override
-	public List<PensamientoDist> readPensamientosPositionRadio(int radio, int lat, int lon){
+	public List<PensamientoDist> readPensamientosPositionRadio(float radio, float lat, float lon){
 		Session session = SessionFactoryService.get().openSession();
 		List<PensamientoDist> pensamientos = new ArrayList<>();
 		try {
@@ -101,8 +101,7 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		}
 		return pensamientos;
 	}
-	
-	
+
 	@Override
 	public void createPensamiento(Pensamiento pensamiento) {
 		Session session = SessionFactoryService.get().openSession();

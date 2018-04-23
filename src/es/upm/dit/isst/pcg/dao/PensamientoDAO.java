@@ -14,7 +14,9 @@ public interface PensamientoDAO {
 	// Necesitamos leer todos los pensamientos, los de un user y leer aquellos con una posición exacta
 	public List<Pensamiento> readPensamientos();
 	public List<Pensamiento> readPensamientosUsuario(Usuario user);
-	public List<PensamientoDist> readPensamientosPositionRadio(int radio, int lat, int lon);	
+	public List<PensamientoDist> readPensamientosPositionRadio(float radio, float lat, float lon);
+	// public List<Pensamiento> readPensamientos (Position position);
+	
 	// Necesitamos obtener la posición de un pensamiento CON UNA CLASE POSICIÓN? 
 	// O hacer dos métodos para obtener latitud y longitud pero veo mejor POSITION
 	//public Position position( Pensamiento pensamiento );

@@ -1,6 +1,7 @@
 package es.upm.dit.isst.pcg.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 //Esta clase representa la entidad Pensamiento que puede escribir cada usuario.
@@ -18,10 +19,21 @@ public class PensamientoDist implements Serializable{
 	private int votosPositivo;
 	private int votosNegativo;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //OJITO A ESTO QUE LO DE USER ME LO HE INVENTADO
+	private List<PensamientoDist> pensamientosFiltrados;
+	
 	public PensamientoDist() {
 		this.votosNegativo=0;
 		this.votosPositivo=0;
 	}
+	
+	public List<PensamientoDist> getPensamientosFiltrados() {
+		return this.pensamientosFiltrados;
+	}
+	public void setPensamientosFiltrados(List<PensamientoDist> todos) {
+		this.pensamientosFiltrados = todos;
+	}
+	
 	
 	public int getId() {
 		return this.id;
