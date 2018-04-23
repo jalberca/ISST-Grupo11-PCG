@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import es.upm.dit.isst.pcg.model.Pensamiento;
-import es.upm.dit.isst.pcg.model.PensamientoDist;
 import es.upm.dit.isst.pcg.model.Usuario;
 import es.upm.dit.isst.pcg.dao.SessionFactoryService;
 
@@ -77,30 +76,6 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		return pensamientos;
 	}
 	
-	@Override
-	public List<PensamientoDist> readPensamientosPositionRadio(float radio, float lat, float lon){
-		Session session = SessionFactoryService.get().openSession();
-		List<PensamientoDist> pensamientos = new ArrayList<>();
-		try {
-
-			session.beginTransaction();
-			pensamientos.addAll(session.createQuery("SELECT *, "
-					+ "(6371 * ACOS(SIN(RADIANS(latitud)) * SIN(RADIANS(:long)) "
-					+ "+ COS(RADIANS(longitud - :lat)) * COS(RADIANS(latitud)) "
-					+ "* COS(RADIANS(4.6665578)) "
-					+ ")) AS distance from Pensamiento having distance < :radio order by distance")
-					.setParameter("radio", radio)
-					.setParameter("lat", lat)
-					.setParameter("long", lon)
-					.getResultList() );
-			session.getTransaction().commit();
-		}catch(Exception e) {
-			
-		}finally {
-			session.close();
-		}
-		return pensamientos;
-	}
 
 	@Override
 	public void createPensamiento(Pensamiento pensamiento) {

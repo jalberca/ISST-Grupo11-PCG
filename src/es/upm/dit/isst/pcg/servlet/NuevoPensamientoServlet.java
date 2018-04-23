@@ -30,7 +30,7 @@ public class NuevoPensamientoServlet extends HttpServlet{
 		} else if (statusLoc != "") {
 			float latitud = Float.parseFloat(req.getParameter("latitud"));
 			float longitud = Float.parseFloat(req.getParameter("longitud"));
-			
+					
 			
 			List<Pensamiento> todosPensamientos = PensamientoDAOImplementation.getInstance().readPensamientos();
 			
