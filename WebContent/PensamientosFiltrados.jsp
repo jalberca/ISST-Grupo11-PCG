@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
-<title>ThinkingPlace</title>
+<title>Pensamientos Filtrados - ThinkingPlace</title>
+<link rel="icon" type="image/png" href="/imágenes/mifavicon.png" />
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/w3.css">
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -21,7 +24,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       /* Optional: Makes the sample page fill the window. */
       .map {
         height: 100%;
-        margin: 100px;
+        margin-top:10px; 
+        width:90%; 
+        text-align:center;
+        
         padding: 200px;
       }
       .controls {
@@ -64,7 +70,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         width: 345px;
       }
 </style>
-<body class="w3-theme-l5">
+<body class="w3-theme-l5" onload="posicionActual();">
+
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -74,7 +81,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Filtrar"><i class="fa fa-globe"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Ajustes"><i class="fa fa-user"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Chat"><i class="fa fa-envelope"></i></a>
-
   <a href="Login.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">Logout</a>
  </div>
 </div>
@@ -89,10 +95,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   <a href="Login.jsp" class="w3-bar-item w3-button w3-padding-large">Logout</a>
 </div>
 
-<!-- Page Container -->
-<div style="margin-top:4%;width:50%;height:800px;float:left;" >
-<h2>Hola, ${user.email }</h2>
-<p>Los pensamientos de esta zona son:</p>
+<!-- Page" Container -->
+<div class="w3-container w3-content" style="margin-top:4%;width:50%;height:800px;float:left;" >
+<h2 style="text-align:center;">Los pensamientos de esta zona son:</h2>
 
 <c:forEach items="${pensamientos}" var="pensamiento">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -103,23 +108,34 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </c:forEach>
 </div>
 
-<div style="margin-top:4%; width:50%;height:100%;float:right;">
-
-<form action="PensamientosFiltradosServlet" style="text-align: center;margin-top:10px;">
-	<input id="lat" type="text" name="latitud" placeholder="Latitud(grados)"><br>
-	<input id="long" type="text" name="longitud" placeholder="Longitud(grados)"><br>
-	<input id="cp" type="number" name="CP" placeholder="Código Postal"><br><br>
-	<input type="text" name="radio" placeholder="Radio (metros)" min="500" ><br>
-	<button type="submit" onclick='return escribir()'>Filtrar</button>
+<div style="margin-top:4%; width:50%;height:100%;float:right; ">
+<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
+  <table align="center" >
+  <tr>  
+  <th>Latitud:</th><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"></th>
+  </tr>
+  <tr>
+  <th>Longitud:</th><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th>
+  </tr>
+  <tr>
+  <th>Código Postal:</th><th><input id="cp" type="number" name="CP" placeholder="Código Postal"></th>
+  </tr>
+  <tr>
+  <th>Radio:</th><th><input type="text" name="radio" placeholder="Radio (metros)"></th>
+  </tr>
+  </table>
+  <button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
 </form>
 
-
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="map" class="map" style="margin-top:10px;" ></div>
+<div id="map" class="map"  ></div>
 <div id="location" class="location"></div>
 
 </div>
      <script>
+        
+     
+     
 	function escribir(){
 		if((document.getElementById('lat').value === null || document.getElementById('long').value === null) && document.getElementById('cp').value !== null){
 			var ajax_url ='http://maps.googleapis.com/maps/api/geocode/json?address='+ document.getElementById('cp').value +'&region=ES&sensor=false';
@@ -127,8 +143,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	  	ajax_request.open( "GET", ajax_url1, false);
       	  	ajax_request.send();
       	  	var JSON1 =  JSON.parse(ajax_request.response);
-      	  document.getElementById('lat').value  = JSON2.results[0].geometry.location.lat;
-      	 document.getElementById('long').value  = JSON2.results[0].geometry.location.lng;
+      	  document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
+      	 document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
 		}
 	}
      
@@ -197,8 +213,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
-        	  var JSON1 =  JSON.parse(ajax_request.response);
-          	document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;
+        	  var JSON2 =  JSON.parse(ajax_request.response);
+          	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
             //CÓDIGO PARA IMPRIMIR LA LATITUD Y LONGITUD - MÉTODO PARA SUMARLE LA DISTANCIA QUE ELIJA EL USUARIO Y TENER UN RADIO CIRCULAR ALREDEDOR
@@ -279,10 +295,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <br>
 
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Footer</h5>
-</footer>
+
+
+
 
  
 <script>

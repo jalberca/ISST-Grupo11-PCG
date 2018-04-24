@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-	<title>Login V11</title>
+	<title>Login - ThinkingPlace</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -29,30 +29,27 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				
-					<span class="login100-form-title p-b-55">
-						Login
-					</span>
-
-
+						<div>
+						<div style="font-size:30px; text-align:center; font-weight:bold">Login</div>
+						<div> </div>
+						<img src="images/thinkingplace.png" style="width:350px; height:250px"/>
+						</div>
+					
 					<div class="text-center w-full p-t-42 p-b-22">
 						<span class="txt1">
 							Autentiquese con Google:
 						</span>
-					</div>
+					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align:center; margin-left:110px"></div>
 
-					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="align:center"></div>
-
-					<div class="text-center w-full p-t-115">
 						<span class="txt1" id="texto">
+						
 						</span>
 							<form action="LoginOAuth">
 								<input type="hidden" name="email" id="Email" value="">
 								<input type="hidden" name="token" id="Token" value="">
 								<button type="submit" style="background-color: orange; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer ">Login</button>
 							 </form>
-					</div>
-				
+				</div>
 			</div>
 		</div>
 	</div>
