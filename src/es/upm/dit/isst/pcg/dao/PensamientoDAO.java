@@ -34,6 +34,9 @@ public interface PensamientoDAO {
 	
 	//Para obtener el texto
 	public String textoPensamiento(Pensamiento pensamiento);
+	
+	//Para obtener pensamiento a partir de email
+	public Pensamiento readPensamiento(int id);
 
 	
 }

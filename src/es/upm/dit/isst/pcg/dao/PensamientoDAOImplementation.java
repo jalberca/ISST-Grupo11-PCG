@@ -97,7 +97,7 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		Session session = SessionFactoryService.get().openSession();
 		try {
 			session.beginTransaction();
-			session.save(pensamiento);
+			session.saveOrUpdate(pensamiento);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 		} finally {
@@ -183,5 +183,19 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 			session.close();
 		}
 		return texto;
+	}
+	
+	@Override
+	public Pensamiento readPensamiento(int id) {
+		Session session = SessionFactoryService.get().openSession();
+		Pensamiento pensamiento = null;
+		try {
+			pensamiento = session.get(Pensamiento.class, id);
+		} catch (Exception e) {
+		} finally {
+			session.close();
+
+		}
+		return pensamiento;
 	}
 }

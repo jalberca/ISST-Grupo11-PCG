@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import es.upm.dit.isst.pcg.model.Pensamiento;
 import es.upm.dit.isst.pcg.model.Usuario;
 import es.upm.dit.isst.pcg.dao.SessionFactoryService;
 
@@ -148,6 +149,22 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 			session.close();
 		}
 		return userEmail;
+	}
+	
+	@Override
+	public int reportes (Usuario user) {
+		Session session = SessionFactoryService.get().openSession();
+		int reportes = 0;
+		try {
+			reportes = (int) session.createQuery("select t.reports from Usuario t where t.id = :id")
+			.setParameter("id", user.getID())
+			.uniqueResult();
+		}catch(Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return reportes;
 	}
 
 }

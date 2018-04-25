@@ -14,12 +14,14 @@ public class Usuario implements Serializable{
 	private String email;
 	private String token;
 	private String typeUser;
+	private int reports;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //OJITO A ESTO QUE LO DE USER ME LO HE INVENTADO
 	private List<Pensamiento> misPensamientos;
 	
 	public Usuario () {
 		this.misPensamientos = new ArrayList<>();
+		this.reports=0;
 	}
 	
 	public int getID() {
@@ -58,6 +60,10 @@ public class Usuario implements Serializable{
 	public List<Pensamiento> getMisPensamientos(){
 		
 		return this.misPensamientos;
+	}
+	
+	public void reportsUP() {
+		this.reports++;
 	}
 
 }

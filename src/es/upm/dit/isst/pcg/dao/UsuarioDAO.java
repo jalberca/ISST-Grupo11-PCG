@@ -25,4 +25,7 @@ public interface UsuarioDAO {
 	
 	// No sé bien cómo va lo del token pero seguramente se necesite algo aquí jejejej
 	
+	//Javi: sacar reportes dado el usuario
+	public int reportes(Usuario user);
+	
 }

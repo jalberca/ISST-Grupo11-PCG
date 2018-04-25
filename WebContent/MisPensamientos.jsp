@@ -54,6 +54,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <!-- Middle Column -->
     <div class="w3-col m7" id="content">
     <h2>Hola, ${user.email }</h2>
+    <h3></h3>
 	<div class="w3-row-padding">
 	        <div class="w3-col m12">
 	          <div class="w3-card w3-round w3-white">
@@ -82,7 +83,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <span class="w3-right w3-opacity">${pensamiento.date }</span>
         <p>${pensamiento.text }</p>
-        <p>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</p>
+       <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
       </div>
 </c:forEach>
 

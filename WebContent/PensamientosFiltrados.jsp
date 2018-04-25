@@ -99,13 +99,38 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-container w3-content" style="margin-top:4%;width:50%;height:800px;float:left;" >
 <h2 style="text-align:center;">Los pensamientos de esta zona son:</h2>
 
-<c:forEach items="${pensamientos}" var="pensamiento">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${pensamiento.date }</span>
-        <p>${pensamiento.text }</p>
-        <p>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</p>
-      </div>
-</c:forEach>
+	<c:forEach items="${pensamientos}" var="pensamiento">
+		<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+	        <span class="w3-right w3-opacity">${pensamiento.date }</span>
+	        <p>${pensamiento.text }</p>
+	        <div>
+	        <table>
+	        <tr>
+	        <form action="VotarPositivo">
+	        	<input type="hidden" name="cargar" value="${cargar }">
+	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+	        	<button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  (${pensamiento.votosPositivo })</button>
+	        </form>
+	        <form action="VotarNegativo">
+	        	<input type="hidden" name="cargar" value="${cargar }">
+	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+	        	<button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-down"></i>   (${pensamiento.votosNegativo })</button>
+	        </form>
+	        
+	        <form action="ReportarServlet">
+	        	<input type="hidden" name="cargar" value="${cargar }">
+	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i>  Report</button>
+	        </form>
+	        
+	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+	        </tr>
+	        </table>
+	        </div>
+	      </div>
+	</c:forEach>
+
+
 </div>
 
 <div style="margin-top:4%; width:50%;height:100%;float:right; ">

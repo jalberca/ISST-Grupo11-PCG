@@ -21,9 +21,11 @@ public class PensamientosFiltradosServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String r = req.getParameter("radio");
 		String lat = req.getParameter("latitud");
 		String lon = req.getParameter("longitud");
+		String cp = req.getParameter("cp");
 		if(r=="" || lat=="" || lon=="") {
 				resp.sendRedirect(req.getContextPath()+ "/PensamientosFiltrados.jsp");
 		} else {
@@ -33,10 +35,13 @@ public class PensamientosFiltradosServlet extends HttpServlet{
 			
 			List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientos();
 			
-			List<Pensamiento> pollas = pensamientosFiltrados(todosPensamientos, latitud, longitud, radio);
+			List<Pensamiento> pensamientosElegidos = pensamientosFiltrados(todosPensamientos, latitud, longitud, radio);
 	
 			
-			req.getSession().setAttribute("pensamientos", pollas);
+			req.getSession().setAttribute("pensamientos", pensamientosElegidos);
+		
+			String cargar="/PensamientosFiltradosServlet?latitud="+latitud+"&longitud="+longitud+"&CP="+cp+"&radio="+r;
+			req.getSession().setAttribute("cargar", cargar);
 			resp.sendRedirect(req.getContextPath()+ "/PensamientosFiltrados.jsp");
 		}
 	}
