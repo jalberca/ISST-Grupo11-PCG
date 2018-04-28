@@ -12,12 +12,15 @@ public class Comentario implements Serializable{
 	@Id
 	private int id;
 	private String text;
-	private int pensamiento_id;
+	private int pensamiento;
 	private String date;
 
 	
 	public Comentario() {
-
+		this.id=0;
+		this.text="";
+		this.pensamiento=0;
+		this.date=null;
 	}
 	
 	public int getId() {
@@ -35,11 +38,11 @@ public class Comentario implements Serializable{
 	}
 
 	public int getPensamientoId() {
-		return pensamiento_id;
+		return pensamiento;
 	}
 
-	public void setPensamientoId(int pensamiento_id) {
-		this.pensamiento_id = pensamiento_id;
+	public void setPensamientoId(int pensamientoID) {
+		this.pensamiento = pensamientoID;
 	}
 
 	public String getDate() {

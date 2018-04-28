@@ -13,4 +13,6 @@ public interface ComentarioDAO {
 
 	public void createComentario(Comentario comentario);
 	
+	public List<Comentario> readComentarios();
+
 }

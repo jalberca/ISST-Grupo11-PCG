@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.upm.dit.isst.pcg.dao.ComentarioDAOImplementation;
 import es.upm.dit.isst.pcg.dao.PensamientoDAOImplementation;
+import es.upm.dit.isst.pcg.model.Comentario;
 import es.upm.dit.isst.pcg.model.Pensamiento;
 import es.upm.dit.isst.pcg.model.Usuario;
 
@@ -36,9 +38,10 @@ public class PensamientosFiltradosServlet extends HttpServlet{
 			List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientos();
 			
 			List<Pensamiento> pensamientosElegidos = pensamientosFiltrados(todosPensamientos, latitud, longitud, radio);
-	
+			List<Comentario> todosComentarios = ComentarioDAOImplementation.getInstance().readComentarios();
 			
 			req.getSession().setAttribute("pensamientos", pensamientosElegidos);
+			req.getSession().setAttribute("comentarios", todosComentarios);
 		
 			String cargar="/PensamientosFiltradosServlet?latitud="+latitud+"&longitud="+longitud+"&CP="+cp+"&radio="+r;
 			req.getSession().setAttribute("cargar", cargar);

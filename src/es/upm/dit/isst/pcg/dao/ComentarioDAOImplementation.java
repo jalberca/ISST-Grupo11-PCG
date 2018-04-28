@@ -19,10 +19,26 @@ public class ComentarioDAOImplementation implements ComentarioDAO{
 	public static ComentarioDAOImplementation getInstance() {
 		if (null == instance) {
 			instance = new ComentarioDAOImplementation();
-		}
+			System.out.println("aqui si");
+			}
 		return instance;
 	}
 
+	@Override
+	public List<Comentario> readComentarios() {
+		Session session = SessionFactoryService.get().openSession();
+		List<Comentario> comentarios = new ArrayList<>();
+		try {
+			session.beginTransaction();
+			comentarios.addAll(session.createQuery("select t from Comentario t").getResultList() );
+			session.getTransaction().commit();
+		}catch(Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return comentarios;
+	}
 	@Override
 	public List<Comentario> readComentarios(Pensamiento pensamiento) {
 		Session session = SessionFactoryService.get().openSession();
@@ -41,12 +57,16 @@ public class ComentarioDAOImplementation implements ComentarioDAO{
 		return comentarios;
 	}
 
+	@Override
 	public void createComentario(Comentario comentario) {
 		Session session = SessionFactoryService.get().openSession();
+		System.out.println("y aquiii");
 
 		try {
 			session.beginTransaction();
 			session.save(comentario);
+			System.out.println("guardando el comenttt");
+			System.out.println(comentario);
 			session.getTransaction().commit();
 
 		} catch (Exception e) {

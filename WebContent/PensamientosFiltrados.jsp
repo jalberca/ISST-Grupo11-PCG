@@ -122,11 +122,31 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
 	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i>  Report</button>
 	        </form>
-	        
-	        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>
+	        	        
+                 
+
 	        </tr>
 	        </table>
 	        </div>
+	        <form action="NuevoComentarioServlet">
+	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+	          		<input type="hidden" id="estado" name="status" value="">
+	          		<input type="hidden" id="latitud" name="latitud" value="">
+	           		<input type="hidden" id="longitud" name="longitud" value="">
+	           		<input type="hidden" name="email" value="${user.email }">
+					<textarea type="text" name="text" placeholder="¿Qué opinas de este pensamiento?" style="font-size:16px; width:500px;height:100px;"></textarea>
+					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Comentar</button></p>
+				</form>
+            <c:forEach items="${comentarios}" var="comentario">
+
+				<c:if test="${comentario.getPensamientoId() == pensamiento.id }">
+					
+					<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		       			<span class="w3-right w3-opacity">${comentario.date }</span>
+		       			<p>${comentario.text }</p>
+		       		</div>
+		       		</c:if>
+           	</c:forEach>
 	      </div>
 	</c:forEach>
 
