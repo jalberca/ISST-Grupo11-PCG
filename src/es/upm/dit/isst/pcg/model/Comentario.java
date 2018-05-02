@@ -37,7 +37,7 @@ public class Comentario implements Serializable{
 		this.text=texto;
 	}
 
-	public int getPensamientoId() {
+	public int getPensamiento() {
 		return pensamiento;
 	}
 

@@ -122,8 +122,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
 	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i>  Report</button>
 	        </form>
-	        	        
-                 
 
 	        </tr>
 	        </table>
@@ -138,14 +136,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Comentar</button></p>
 				</form>
             <c:forEach items="${comentarios}" var="comentario">
-
-				<c:if test="${comentario.getPensamientoId() == pensamiento.id }">
-					
+                <c:set var = "pensid" scope = "session" value = "${pensamiento.id}"/>
+            <c:set var="comentpens" value="${comentario.pensamiento}"/>
+<%-- 			<c:out value="${pensid}"/><p>
+			<c:out value="${comentpens}"/><p> --%>
+            
 					<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
 		       			<span class="w3-right w3-opacity">${comentario.date }</span>
 		       			<p>${comentario.text }</p>
+		       			
 		       		</div>
-		       		</c:if>
            	</c:forEach>
 	      </div>
 	</c:forEach>
