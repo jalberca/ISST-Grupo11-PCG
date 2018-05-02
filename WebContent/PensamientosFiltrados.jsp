@@ -139,13 +139,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
                 <c:set var = "pensid" scope = "session" value = "${pensamiento.id}"/>
             <c:set var="comentpens" value="${comentario.pensamiento}"/>
 <%-- 			<c:out value="${pensid}"/><p>
-			<c:out value="${comentpens}"/><p> --%>
-            
-					<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-		       			<span class="w3-right w3-opacity">${comentario.date }</span>
-		       			<p>${comentario.text }</p>
+				<c:out value="${comentpens}"/><p> --%>
+            	<c:choose>
+    				<c:when test="${pensid == comentpens }">
+						<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		       				<span class="w3-right w3-opacity">${comentario.date }</span>
+		       				<p>${comentario.text }</p>
 		       			
-		       		</div>
+		       			</div>
+		        	</c:when>
+    				<c:otherwise>
+    				</c:otherwise>
+				</c:choose>
+
            	</c:forEach>
 	      </div>
 	</c:forEach>
