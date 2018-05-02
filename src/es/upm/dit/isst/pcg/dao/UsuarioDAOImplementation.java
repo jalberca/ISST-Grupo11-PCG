@@ -166,5 +166,20 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 		}
 		return reportes;
 	}
+	@Override
+	public List<Usuario> readReportedUsers() {
+		Session session = SessionFactoryService.get().openSession();
+		List<Usuario> users = new ArrayList<>();
+		try {
+			session.beginTransaction();
+			users.addAll(session.createQuery("select t from Usuario t where t.reports > 0 ORDER BY t.reports DESC ").getResultList() );
+			session.getTransaction().commit();
+		}catch(Exception e) {
+			
+		}finally {
+			session.close();
+		}
+		return users;
+	}
 
 }

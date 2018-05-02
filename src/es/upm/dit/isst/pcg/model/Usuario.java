@@ -65,5 +65,9 @@ public class Usuario implements Serializable{
 	public void reportsUP() {
 		this.reports++;
 	}
+	
+	public int getReports() {
+		return this.reports;
+	}
 
 }

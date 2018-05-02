@@ -10,7 +10,10 @@ public interface UsuarioDAO {
 
 	// Necesitamos leer todos los usuarios en algún momento????
 	public List<Usuario> readAllUsers( );
+	
+	public List<Usuario> readReportedUsers( );
 
+	
 	// Métodos también lógicos
 	public void createUsuario( Usuario user );
 	public Usuario readUsuario( String email );
