@@ -167,7 +167,7 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 		return reportes;
 	}
 	
-	//Devuelve los usuarios reportados ordenados en orden descente de reportes
+	//Devuelve los usuarios reportados ordenados en orden descente de número de reportes
 	@Override
 	public List<Usuario> readReportedUsers() {
 		Session session = SessionFactoryService.get().openSession();
