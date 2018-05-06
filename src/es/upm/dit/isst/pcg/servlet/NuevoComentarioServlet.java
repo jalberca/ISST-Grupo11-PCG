@@ -39,7 +39,9 @@ public class NuevoComentarioServlet extends HttpServlet{
 			comentario.setId(todosComentarios.size()+1);
 
 			ComentarioDAOImplementation.getInstance().createComentario(comentario);
-	
+			
+			todosComentarios = ComentarioDAOImplementation.getInstance().readComentarios();
+			
 			req.getSession().setAttribute("user", user);
 			req.getSession().setAttribute("comentarios", todosComentarios);
 

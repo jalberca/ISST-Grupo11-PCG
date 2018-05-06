@@ -123,9 +123,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i>  Report</button>
 	        </form>
 
+			<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar(this, ${pensamiento.id }); return false" />Desplegar comentarios</a>
+
 	        </tr>
 	        </table>
 	        </div>
+
+	        <div id="${pensamiento.id}" style="display:none">
 	        <form action="NuevoComentarioServlet">
 	        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
 	          		<input type="hidden" id="estado" name="status" value="">
@@ -153,6 +157,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 				</c:choose>
 
            	</c:forEach>
+           	</div>
 	      </div>
 	</c:forEach>
 
@@ -184,7 +189,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 </div>
      <script>
-        
+     function mostrar(enla, etiq) {
+    	  obj = document.getElementById(etiq);
+    	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
+    	  enla.innerHTML = (enla.innerHTML == 'Cerrar comentarios') ? 'Desplegar comentarios' : 'Cerrar comentarios';
+    	}
      
      
 	function escribir(){
@@ -342,14 +351,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNbFI-znN_Obo0ENJTRZkyn-vycXJwoZ0&libraries=places&callback=initAutocomplete"
       async defer></script>
 
-
-
 <br>
-
-
-
-
-
  
 <script>
 // Accordion
