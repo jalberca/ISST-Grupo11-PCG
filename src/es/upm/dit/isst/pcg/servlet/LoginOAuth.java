@@ -24,14 +24,17 @@ public class LoginOAuth extends HttpServlet{
 		
 		String email = req.getParameter("email");
 		String token = req.getParameter("token");
-		String admin = "2javier.alberca27@gmail.com";
+		String admin = "nachovv96@gmail.com";
 		
 		Usuario user = UsuarioDAOImplementation.getInstance().loginUser(email, token);
 		if(null != user) {
 			
+			
 			req.getSession().setAttribute("user", user);
 			
-			if(user.getTypeUser().equals("admian")) {
+			if(user.getTypeUser().equals("admin")) {
+				List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientosPorVotos();
+				req.getSession().setAttribute("pensamientos", todosPensamientos);
 				resp.sendRedirect(req.getContextPath() + "/VistaAdmin.jsp");
 			}else {
 				resp.sendRedirect(req.getContextPath() + "/MisPensamientos.jsp");
@@ -56,7 +59,10 @@ public class LoginOAuth extends HttpServlet{
 			UsuarioDAOImplementation.getInstance().updateUsuario(user);
 			
 			req.getSession().setAttribute("user", user);
+			
 			if(user.getTypeUser().equals("admin")) {
+				List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientosPorVotos();
+				req.getSession().setAttribute("pensamientos", todosPensamientos);
 				resp.sendRedirect(req.getContextPath() + "/VistaAdmin.jsp");
 			}else {
 				resp.sendRedirect(req.getContextPath() + "/MisPensamientos.jsp");

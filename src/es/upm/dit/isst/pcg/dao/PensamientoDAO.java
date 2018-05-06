@@ -12,6 +12,7 @@ public interface PensamientoDAO {
 
 	// Necesitamos leer todos los pensamientos, los de un user y leer aquellos con una posición exacta
 	public List<Pensamiento> readPensamientos();
+	public List<Pensamiento> readPensamientosPorVotos();
 	public List<Pensamiento> readPensamientosUsuario(Usuario user);
 	
 	// Necesitamos obtener la posición de un pensamiento CON UNA CLASE POSICIÓN? 

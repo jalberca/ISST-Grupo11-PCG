@@ -15,7 +15,7 @@
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
 
-<body class="w3-theme-l5" onLoad="">
+<body class="w3-theme-l5" onLoad="AdminUsuariosServlet">
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -29,8 +29,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="VistaAdmin.jsp" class="w3-bar-item w3-button w3-padding-large">Pensamientos</a>
-  <a href="AdminUsuarios.jsp" class="w3-bar-item w3-button w3-padding-large">UUsarios</a>
+  <form action="VistaAdminServlet"><button type="submit"  class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</button></form>
+  <form action="AdminUsuariosServlet"><button type="submit"  class="w3-bar-item w3-button w3-padding-large">Usuarios</button></form>
   <a href="login.html" class="w3-bar-item w3-button w3-padding-large">Logout</a>
 </div>
 
@@ -46,25 +46,26 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </div>
     
     <!-- Middle Column -->
-    <div class="w3-col m7" id="content">
-    <h2>Hola, Administrador</h2>
-    <h3></h3>
+    <div  class="w3-col m7" id="content">
+    
 
+<p>Aquí están todos los usuarios registrados hasta el momento: </p>
 
+<form action="AdminUsuariosServlet">
+<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Comentar</button></p>
+</form>
 
-<p>Aquí están todos los pensamientos publicados hasta el momento: </p>
-
-<c:forEach items="${pensamientos }" var="pensamiento">
+<c:forEach items="${usuarios}" var="usuario">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${pensamiento.date }</span>
-        <p>${pensamiento.text }</p>
-       <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
-       <form action="BanearPensamientoServlet">
-       	<input type="hidden" name="id" value="${pensamiento.id }">
-       	<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>ELIMINAR PENSAMIENTO</button>
+       <p> El usuario con ID: ${usuario.ID } tiene ${usuario.reports} reportes.
+       <form action="BanearUsuarioServlet">
+       	<input type="hidden" name="correo" value="${usuario.email }">
+       	<input type="hidden" name="us" value="${usuario }">
+       	<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>ELIMINAR USUARIO</button>
        </form></p>
       </div>
 </c:forEach>
+
 
 
     <!-- End Middle Column -->
