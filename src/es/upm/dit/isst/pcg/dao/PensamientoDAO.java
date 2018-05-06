@@ -25,7 +25,8 @@ public interface PensamientoDAO {
 	// DEJAMOS MODIFICAR PENSAMIENTOS????? NO, NO?
 	public void updatePensamiento( Pensamiento pensamiento);
 	public void deletePensamiento( Pensamiento pensamiento );
-	
+	public void deletePensamientos( int user_id );
+
 	// Para obtener su puntuación
 	public int votosPositivos( Pensamiento pensamiento);
 	public int votosNegativos( Pensamiento pensamiento);

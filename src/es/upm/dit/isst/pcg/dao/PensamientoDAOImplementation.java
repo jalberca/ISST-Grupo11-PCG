@@ -81,7 +81,7 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		List<Pensamiento> pensamientos = new ArrayList<>();
 		try {
 			session.beginTransaction();
-			pensamientos.addAll(session.createQuery("select t from Pensamiento t  where p.user = :user")
+			pensamientos.addAll(session.createQuery("select t from Pensamiento t  where t.user = :user")
 	        .setParameter("user", user)
 	        .getResultList() );
 			session.getTransaction().commit();
@@ -128,6 +128,24 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		try {
 			session.beginTransaction();
 			session.delete(pensamiento);
+			session.getTransaction().commit();
+
+		} catch (Exception e) {
+
+		} finally {
+
+			session.close();
+		}
+	}
+	
+	@Override
+	public void deletePensamientos(int user_id) {
+		Session session = SessionFactoryService.get().openSession();
+		try {
+			session.beginTransaction();
+			session.createQuery("delete from Pensamiento t where t.user_id = :user_id")
+			.setParameter("user_id", user_id)
+			.getResultList();
 			session.getTransaction().commit();
 
 		} catch (Exception e) {

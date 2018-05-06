@@ -20,10 +20,8 @@ import es.upm.dit.isst.pcg.model.Pensamiento;
 public class VistaAdminServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientos();
-		System.out.println(todosPensamientos);
+		List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientosPorVotos();
 		req.getSession().setAttribute("pensamientos", todosPensamientos);
-		
 		resp.sendRedirect(req.getContextPath()+ "/VistaAdmin.jsp");
 	}
 }

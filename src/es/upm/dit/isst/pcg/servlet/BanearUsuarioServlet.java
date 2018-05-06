@@ -22,15 +22,28 @@ import es.upm.dit.isst.pcg.model.Usuario;
 public class BanearUsuarioServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("correo");
-		// int id = req.getParameter("id");
-		// Usuario user = UsuarioDAOImplementation.getInstance().readUsuario(id);
-		
-		// UsuarioDAOImplementation.getInstance().deleteUsuario(user);
+		String id1 = req.getParameter("id");
+		int id = Integer.parseInt(id1);
+		System.out.println(id);
+		Usuario user = UsuarioDAOImplementation.getInstance().readUsuario(id);
+		System.out.println("usuario: "+user);
+		List<Pensamiento> borrar = PensamientoDAOImplementation.getInstance().readPensamientosUsuario(user);
+		System.out.println("ey1"+borrar);
+		borrarPensamientos(borrar);
+		UsuarioDAOImplementation.getInstance().deleteUsuario(user);
 		
 		List<Usuario> todosUsuarios  = UsuarioDAOImplementation.getInstance().readReportedUsers();
+		
 		req.getSession().setAttribute("usuarios", todosUsuarios);
 		
 		resp.sendRedirect(req.getContextPath()+ "/AdminUsuarios.jsp");
+	}
+	
+	private void borrarPensamientos(List<Pensamiento> todosPensamientos) {
+		System.out.println("ey2");
+		for(int i=0; i<todosPensamientos.size(); i++) {
+			System.out.println("ey3"+todosPensamientos.get(i));
+			PensamientoDAOImplementation.getInstance().deletePensamiento(todosPensamientos.get(i));
+		}
 	}
 }

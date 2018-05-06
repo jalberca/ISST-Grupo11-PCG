@@ -59,8 +59,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
        <p> El usuario con ID: ${usuario.ID } tiene ${usuario.reports} reportes.
        <form action="BanearUsuarioServlet">
-       	<input type="hidden" name="correo" value="${usuario.email }">
-       	<input type="hidden" name="us" value="${usuario }">
+       	<input type="hidden" name="id" value="${usuario.ID }">
        	<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>ELIMINAR USUARIO</button>
        </form></p>
       </div>
