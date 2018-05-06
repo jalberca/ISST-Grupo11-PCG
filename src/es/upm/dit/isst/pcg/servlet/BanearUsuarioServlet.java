@@ -23,9 +23,10 @@ public class BanearUsuarioServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("correo");
-		Usuario user = UsuarioDAOImplementation.getInstance().readUsuario(email);
+		// int id = req.getParameter("id");
+		// Usuario user = UsuarioDAOImplementation.getInstance().readUsuario(id);
 		
-		UsuarioDAOImplementation.getInstance().deleteUsuario(user);
+		// UsuarioDAOImplementation.getInstance().deleteUsuario(user);
 		
 		List<Usuario> todosUsuarios  = UsuarioDAOImplementation.getInstance().readReportedUsers();
 		req.getSession().setAttribute("usuarios", todosUsuarios);

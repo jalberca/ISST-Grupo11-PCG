@@ -77,11 +77,11 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 	// ESTO NO SÉ CÓMO ES PERO NECESITAREMOS ALGO SIMILAR CUANDO SEPAMOS CÓMO VA EL OAUTH
 	// y tal para el login nuuuuu!?!¿?
 	@Override
-	public Usuario readUsuario(String email) {
+	public Usuario readUsuario(int id) {
 		Session session = SessionFactoryService.get().openSession();
 		Usuario user = null;
 		try {
-			user = session.get(Usuario.class, email);
+			user = session.get(Usuario.class, id);
 		} catch (Exception e) {
 		} finally {
 			session.close();
@@ -174,7 +174,8 @@ public class UsuarioDAOImplementation implements UsuarioDAO {
 		List<Usuario> users = new ArrayList<>();
 		try {
 			session.beginTransaction();
-			users.addAll(session.createQuery("select t from Usuario t where t.reports > 0 ORDER BY t.reports DESC ").getResultList() );
+			users.addAll(session.createQuery("select t from Usuario t ORDER BY t.reports DESC ").getResultList() );
+			// users.addAll(session.createQuery("select t from Usuario t where t.reports > 0 ORDER BY t.reports DESC ").getResultList() );
 			session.getTransaction().commit();
 		}catch(Exception e) {
 			

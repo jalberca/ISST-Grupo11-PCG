@@ -64,7 +64,8 @@ public class PensamientoDAOImplementation implements PensamientoDAO{
 		List<Pensamiento> pensamientos = new ArrayList<>();
 		try {
 			session.beginTransaction();
-			pensamientos.addAll(session.createQuery("select t from Pensamiento t where t.votosNegativo > 0 ORDER BY t.votosNegativo DESC").getResultList() );
+			pensamientos.addAll(session.createQuery("select t from Pensamiento t ORDER BY t.votosNegativo DESC").getResultList() );
+			// pensamientos.addAll(session.createQuery("select t from Pensamiento t where t.votosNegativo > 0 ORDER BY t.votosNegativo DESC").getResultList() );
 			session.getTransaction().commit();
 		}catch(Exception e) {
 			

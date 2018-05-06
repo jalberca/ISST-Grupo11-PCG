@@ -16,7 +16,7 @@ public interface UsuarioDAO {
 	
 	// Métodos también lógicos
 	public void createUsuario( Usuario user );
-	public Usuario readUsuario( String email );
+	public Usuario readUsuario( int id );
 	public void updateUsuario( Usuario user );
 	public void deleteUsuario( Usuario user );
 	
