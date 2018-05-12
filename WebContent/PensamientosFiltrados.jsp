@@ -189,6 +189,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 </div>
      <script>
+     
      function mostrar(enla, etiq) {
     	  obj = document.getElementById(etiq);
     	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
@@ -221,11 +222,28 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
      var markers = []; 
      function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+        
+    	 var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 40.4167, lng:  -3.70325},
           zoom: 13,
           mapTypeId: 'roadmap'
         });
+    	 <c:forEach items="${pensamientos}" var="pensamiento">
+			var position = {lat:${pensamiento.latitud}+Math.random()*Math.pow(10,-4),lng:${pensamiento.longitud}+Math.random()*Math.pow(10,-4)};
+			var texto = "${pensamiento.text}";
+			console.log(position);
+			var marcador = new google.maps.Marker({
+			  	  position: position,
+			   	  map: map,
+		  		});
+			var infowindow = new google.maps.InfoWindow({
+		          content: texto
+		        });
+			console.log(texto);
+		        marcador.addListener('click', function() {
+		          infowindow.open(map, marcador);
+		        });
+		</c:forEach>
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -288,20 +306,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           });
           map.fitBounds(bounds);
         });
-        
         map.addListener('click', function(e) {  
         	for (var i=0; i<markers.length; i++) {
       		  markers[i].setMap(null);
       	  }      
         	console.log("Markers");
         	console.log(markers.length);
-
-
             placeMarkerAndPanTo(e.latLng, map);
           });
         
       }
-        
+		 
+     
         var infoWindow = new google.maps.InfoWindow({map: map});
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -321,6 +337,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           handleLocationError(false, infoWindow, map.getCenter());
         }
       
+      
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -329,23 +346,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       }
       
       function placeMarkerAndPanTo(latLng, map) {
-   	   
     	  var marker = new google.maps.Marker({
     	    position: latLng,
     	    map: map
-    	  });
+    	  });    	  
     	  markers.push(marker)
     	  var ajax_url ='http://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&sensor=true_or_false';
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
-         var JSON1 =  JSON.parse(ajax_request.response);
+          var JSON1 =  JSON.parse(ajax_request.response);
           document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;
           document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
     	  map.panTo(latLng);
     	}
-      
+
       
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNbFI-znN_Obo0ENJTRZkyn-vycXJwoZ0&libraries=places&callback=initAutocomplete"
