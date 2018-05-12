@@ -228,22 +228,28 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           zoom: 13,
           mapTypeId: 'roadmap'
         });
+
     	 <c:forEach items="${pensamientos}" var="pensamiento">
 			var position = {lat:${pensamiento.latitud}+Math.random()*Math.pow(10,-4),lng:${pensamiento.longitud}+Math.random()*Math.pow(10,-4)};
 			var texto = "${pensamiento.text}";
 			console.log(position);
+			console.log(${pensamiento.id});
 			var marcador = new google.maps.Marker({
 			  	  position: position,
 			   	  map: map,
 		  		});
-			var infowindow = new google.maps.InfoWindow({
-		          content: texto
-		        });
 			console.log(texto);
-		        marcador.addListener('click', function() {
-		          infowindow.open(map, marcador);
-		        });
+		    var infowindow = new google.maps.InfoWindow();  
+			google.maps.event.addListener(marcador,'click', (function(marcador,texto,infowindow){ 
+			    return function() {
+			        infowindow.setContent(texto);
+			        infowindow.open(map,marcador);
+			    };
+			})(marcador,texto,infowindow)); 			
 		</c:forEach>
+		
+		
+		
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
