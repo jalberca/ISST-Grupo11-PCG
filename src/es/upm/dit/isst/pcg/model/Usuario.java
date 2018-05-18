@@ -9,6 +9,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class Usuario implements Serializable{
 	
@@ -23,9 +26,11 @@ public class Usuario implements Serializable{
 	private Integer reported[] = new Integer[2];
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //OJITO A ESTO QUE LO DE USER ME LO HE INVENTADO
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Pensamiento> misPensamientos;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@Fetch(value= FetchMode.SUBSELECT)
 	private List<Conversacion> misConversaciones;
 	
 	public Usuario () {
