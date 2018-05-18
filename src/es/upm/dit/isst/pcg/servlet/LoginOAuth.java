@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.realm.UserDatabaseRealm;
 
+import es.upm.dit.isst.pcg.dao.ComentarioDAOImplementation;
+import es.upm.dit.isst.pcg.dao.ConversacionDAOImplementation;
 import es.upm.dit.isst.pcg.dao.PensamientoDAOImplementation;
 import es.upm.dit.isst.pcg.dao.UsuarioDAOImplementation;
 import es.upm.dit.isst.pcg.model.Pensamiento;
 import es.upm.dit.isst.pcg.model.Usuario;
+import es.upm.dit.isst.pcg.model.Conversacion;
 
 @WebServlet("/LoginOAuth")
 public class LoginOAuth extends HttpServlet{

@@ -25,8 +25,12 @@ public class Usuario implements Serializable{
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER) //OJITO A ESTO QUE LO DE USER ME LO HE INVENTADO
 	private List<Pensamiento> misPensamientos;
 	
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<Conversacion> misConversaciones;
+	
 	public Usuario () {
 		this.misPensamientos = new ArrayList<>();
+		this.misConversaciones = new ArrayList<>();
 		this.reports=0;
 		liked[0]=0;
 		liked[1]=0;
@@ -72,6 +76,10 @@ public class Usuario implements Serializable{
 	public List<Pensamiento> getMisPensamientos(){
 		
 		return this.misPensamientos;
+	}
+	
+	public List<Conversacion> getMisConversaciones(){
+		return this.misConversaciones;
 	}
 	
 	public Integer[] getLiked(){

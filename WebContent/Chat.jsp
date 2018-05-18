@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<% 
+	String sala = (String) application.getAttribute("sala");
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
-<title>Mis Pensamientos - ThinkingPlace</title>
+<title>Chat - ThinkingPlace</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/w3.css">
@@ -13,9 +17,16 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
 </style>
 
-<body class="w3-theme-l5" onLoad="">
+<script type="text/javascript">
+	function load() {
+		document.getElementById("msg").focus();
+	}
+</script>
+
+<body class="w3-theme-l5" onLoad="load()">
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -53,48 +64,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     
     <!-- Middle Column -->
     <div class="w3-col m7" id="content">
-    <h2>Hola, ${user.email }</h2>
-    <h3></h3>
-	<div class="w3-row-padding">
-	        <div class="w3-col m12">
-	          <div class="w3-card w3-round w3-white">
-	            <div class="w3-container w3-padding">
-	              <h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
-	              
-	              <form action="NuevoPensamientoServlet">
-	              		<input type="hidden" id="estado" name="status" value="">
-	              		<input type="hidden" id="latitud" name="latitud" value="">
-	              		<input type="hidden" id="longitud" name="longitud" value="">
-	              		<input type="hidden" name="email" value="${user.email }">
-						<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:500px;height:100px;"></textarea>
-						<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
-					</form>
-	
-	
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-
-
-<p>Tus pensamientos son:</p>
-
-<c:forEach items="${user.misPensamientos }" var="pensamiento">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${pensamiento.date }</span>
-        <p>${pensamiento.text }</p>
-       <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
-      </div>
-</c:forEach>
-
-<p>Tus chats son:</p>
-
-<c:forEach items="${user.misConversaciones }" var="conversacion">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${conversacion.token }</span>
-        <p>chat</p>
-      </div>
-</c:forEach>
+    <div id="sala"><%=sala%></div>
+    
+    <form action="ChatServlet" method="post" style="text-align:center">
+    	<input type="text" name="msg" style="width: 244px" id="msg"/>
+    	<input type="submit" value="Enviar" style="width: 60px" />
+    </form>
+    
 
 
     <!-- End Middle Column -->
@@ -108,8 +84,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   <!-- End Grid -->
   </div>
   
-<!-- End Page Container -->
-</div>
+
 
 
 <!-- Footer -->
