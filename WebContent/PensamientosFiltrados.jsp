@@ -190,6 +190,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </div>
      <script>
      
+     function sleep(milliseconds) {
+    	  var start = new Date().getTime();
+    	  for (var i = 0; i < 1e7; i++) {
+    	    if ((new Date().getTime() - start) > milliseconds){
+    	      break;
+    	    }
+    	  }
+    	}
+     
      function mostrar(enla, etiq) {
     	  obj = document.getElementById(etiq);
     	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
@@ -203,7 +212,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	  	var ajax_request = new XMLHttpRequest();
       	  	ajax_request.open( "GET", ajax_url1, false);
       	  	ajax_request.send();
+      	  	sleep(2000);
       	  	var JSON1 =  JSON.parse(ajax_request.response);
+      	  	if(JSON1.error_message){
+      	  		return;
+      	  	}
+      	  	console.log(JSON);
       	  document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
       	 document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
 		}
@@ -297,7 +311,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
+        	  sleep(1500);
         	  var JSON2 =  JSON.parse(ajax_request.response);
+        	  if(JSON2.error_message){
+        	  		return;
+        	  	}
           	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
@@ -319,6 +337,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	console.log("Markers");
         	console.log(markers.length);
             placeMarkerAndPanTo(e.latLng, map);
+            
           });
         
       }
@@ -361,7 +380,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
+        	  sleep(200);
           var JSON1 =  JSON.parse(ajax_request.response);
+          if(JSON1.error_message){
+    	  		return;
+    	  	}
+          console.log(JSON1);
           document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;
           document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
@@ -370,7 +394,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
       
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNbFI-znN_Obo0ENJTRZkyn-vycXJwoZ0&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY-KHF4-ZwYtyt3JOm2FRsJn8OK0KAVaY&libraries=places&callback=initAutocomplete"
       async defer></script>
 
 <br>
