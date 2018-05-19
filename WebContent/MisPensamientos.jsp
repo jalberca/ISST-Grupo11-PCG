@@ -91,6 +91,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <c:forEach items="${user.misConversaciones }" var="conversacion">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+	<form action="ChatServlet">
+	<input type="hidden" name="conversacionId" value="${conversacion.id}" />
+	<input type="hidden" name="tokenUser" value="${user.token}" />
+	<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Ir al chat</button></p>
+	</form>
         <p>${conversacion.token }</p>
       </div>
 </c:forEach>

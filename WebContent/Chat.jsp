@@ -71,7 +71,25 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     	<input type="submit" value="Enviar" style="width: 60px" />
     </form>
     
+<c:forEach items="${mensajes}" var="mensaje">
+                <c:set var = "convid" scope = "session" value = "${conversacionId}"/>
+            <c:set var="mensjconv" value="${mensaje.conversacion}"/>
+<%-- 			<c:out value="${convid}"/><p>
+				<c:out value="${mensjconv}"/><p> --%>
+            	<c:choose>
+    				<c:when test="${convid == mensjconv }">
+						<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		       				<span class="w3-right w3-opacity">${mensaje.date }</span>
+		       				<span class="w3-right w3-opacity">${mensaje.token }</span>
+		       				<p>${mensaje.text }</p>
+		       			
+		       			</div>
+		        	</c:when>
+    				<c:otherwise>
+    				</c:otherwise>
+				</c:choose>
 
+           	</c:forEach>
 
     <!-- End Middle Column -->
     </div>

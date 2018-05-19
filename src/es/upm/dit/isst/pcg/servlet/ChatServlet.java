@@ -30,6 +30,7 @@ public class ChatServlet extends HttpServlet{
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
 		String msg = req.getParameter("msg");
 		String sala = (String) getServletContext().getAttribute("sala");
+		
 		if ( sala == null) {
 			sala = "";
 		}
@@ -58,6 +59,7 @@ public class ChatServlet extends HttpServlet{
 			
 			req.getSession().setAttribute("user", user);
 			req.getSession().setAttribute("mensajes", todosMensajes);
+			req.getSession().setAttribute("conversacionId", conversacionId);
 			
 			sala += "<span>" + userToken + " [" + date + "] " + "</span>" + ": " + msg + "<br/>";
 			
