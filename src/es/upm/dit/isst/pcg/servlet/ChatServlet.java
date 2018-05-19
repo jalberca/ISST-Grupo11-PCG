@@ -31,20 +31,22 @@ public class ChatServlet extends HttpServlet{
 		String msg = req.getParameter("msg");
 		String sala = (String) getServletContext().getAttribute("sala");
 		
+		HttpSession session = req.getSession();
+		String autorToken = (String) session.getAttribute("autorToken");
+		String userToken = (String) session.getAttribute("userToken");
+		int conversacionId = (int) session.getAttribute("conversacionId");
+		
+		List<MensajeChat> todosMensajes = MensajeChatDAOImplementation.getInstance().readMensajes();
+		
 		if ( sala == null) {
 			sala = "";
 		}
 		
 		if ((msg != null) && (msg.trim().length() > 0)) {
-			HttpSession session = req.getSession();
-			String autorToken = (String) session.getAttribute("autorToken");
-			String userToken = (String) session.getAttribute("userToken");
-			int conversacionId = (int) session.getAttribute("conversacionId");
 			
-			List<MensajeChat> todosMensajes = MensajeChatDAOImplementation.getInstance().readMensajes();
 			
 			// Fecha y hora de publicacion del mensaje
-			String date = new SimpleDateFormat("dd-MM-yy HH:mm").format(new Date());
+			String date = new SimpleDateFormat("dd/MM/yy - HH:mm").format(new Date());
 			
 			MensajeChat mensaje = new MensajeChat();
 			mensaje.setConversacionId(conversacionId);
@@ -56,15 +58,14 @@ public class ChatServlet extends HttpServlet{
 			MensajeChatDAOImplementation.getInstance().createMensaje(mensaje);
 			
 			todosMensajes = MensajeChatDAOImplementation.getInstance().readMensajes();
+			System.out.println(mensaje);
 			
-			req.getSession().setAttribute("user", user);
-			req.getSession().setAttribute("mensajes", todosMensajes);
-			req.getSession().setAttribute("conversacionId", conversacionId);
-			
-			sala += "<span>" + userToken + " [" + date + "] " + "</span>" + ": " + msg + "<br/>";
 			
 		}
-		
+		req.getSession().setAttribute("user", user);
+		req.getSession().setAttribute("mensajes", todosMensajes);
+		req.getSession().setAttribute("conversacionId", conversacionId);
+		System.out.println(todosMensajes);
 		getServletContext().setAttribute("sala", sala);
 		resp.sendRedirect(req.getContextPath() + "/Chat.jsp");
 	}

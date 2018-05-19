@@ -23,7 +23,7 @@ public class MensajeChat implements Serializable {
 		this.id = 0;
 		this.conversacion = 0;
 		this.token = "";
-		this.date= null;
+		this.date= "";
 		this.text = "";
 	}
 	
