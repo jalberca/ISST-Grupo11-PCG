@@ -24,14 +24,11 @@ public class LoginOAuth extends HttpServlet{
 		
 		String email = req.getParameter("email");
 		String token = req.getParameter("token");
-		String admin = "nachovv96@gmail.com";
+		String admin = "jramirezsarries@gmail.com";
 		
 		Usuario user = UsuarioDAOImplementation.getInstance().loginUser(email, token);
-		if(null != user) {
-			
-			
+		if(null != user) {			
 			req.getSession().setAttribute("user", user);
-			
 			if(user.getTypeUser().equals("admin")) {
 				List<Pensamiento> todosPensamientos  = PensamientoDAOImplementation.getInstance().readPensamientosPorVotos();
 				req.getSession().setAttribute("pensamientos", todosPensamientos);

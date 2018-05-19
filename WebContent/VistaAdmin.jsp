@@ -17,22 +17,25 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <body class="w3-theme-l5" onLoad="">
 
+
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <form action="VistaAdminServlet"><button type="submit"  class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</button></form>
-  <form action="AdminUsuariosServlet"><button type="submit"  class="w3-bar-item w3-button w3-padding-large">Usuarios</button></form>
-  <a href="Login.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">Logout</a>
- </div>
+  <a style="width:50%" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="VistaAdmin.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Usuarios">Administrar Usuarios</a>
+  <a href="VistaAdmin.jsp" style="width:50%" class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large" title="Administrar Usuarios"><i class="fa fa-home w3-margin-right"></i></a>					
+  <a href="AdminUsuarios.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Pensamientos">Administrar Pensamientos</a>
+  <form action="LogoutServlet" title="Logout"><button type="submit" style="width:20%" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">Logout</button></form> </div>
 </div>
 
+
 <!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="VistaAdmin.jsp" class="w3-bar-item w3-button w3-padding-large">Pensamientos</a>
-  <a href="AdminUsuarios.jsp" class="w3-bar-item w3-button w3-padding-large">UUsarios</a>
-  <a href="login.html" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+<div id="navDemo" style="margin-top:40px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="AdminUsuarios.jsp"  class="w3-bar-item w3-button w3-padding-large" title="Administrar Pensamientos">Administrar Pensamientos</a>
+  <form action="LogoutServlet" class="w3-bar-item w3-button w3-padding-large" title="Logout"><button type="submit" class="w3-button">Logout</button></form> </div>
 </div>
+
+
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
@@ -94,7 +97,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <script type="text/javascript">
 
-
+//Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
 
 </script>
 
