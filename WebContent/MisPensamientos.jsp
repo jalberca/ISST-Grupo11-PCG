@@ -87,12 +87,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       </div>
 </c:forEach>
 
-<p>Tus chats son:</p>
+<p>Chats activos:</p>
 
 <c:forEach items="${user.misConversaciones }" var="conversacion">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${conversacion.token }</span>
-        <p>chat</p>
+        <p>${conversacion.token }</p>
       </div>
 </c:forEach>
 

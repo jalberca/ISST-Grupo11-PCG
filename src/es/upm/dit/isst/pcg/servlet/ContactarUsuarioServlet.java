@@ -49,6 +49,7 @@ public class ContactarUsuarioServlet extends HttpServlet{
 		HttpSession session = req.getSession(true);
 		session.setAttribute("autorToken", autor.getToken());
 		session.setAttribute("userToken", userToken);
+		session.setAttribute("conversacionId", conversacion.getId());
 		resp.sendRedirect("ChatServlet");
 		
 	}
