@@ -18,6 +18,8 @@
         <mapping class="es.upm.dit.isst.pcg.model.Usuario" />
         <mapping class="es.upm.dit.isst.pcg.model.Pensamiento" />
         <mapping class="es.upm.dit.isst.pcg.model.Comentario" />
+        <mapping class="es.upm.dit.isst.pcg.model.Conversacion" />
+        <mapping class="es.upm.dit.isst.pcg.model.MensajeChat" />
         
     </session-factory>
 </hibernate-configuration>
