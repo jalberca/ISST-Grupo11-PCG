@@ -25,7 +25,7 @@ public class ContactarUsuarioServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
-		String pensamientoId = req.getParameter("pensamientoId");
+		//String pensamientoId = req.getParameter("pensamientoId");
 		int userId = Integer.parseInt(req.getParameter("pensamientoId"));
 		
 		String userToken = req.getParameter("userToken"); // Persona que quiere contactar
@@ -38,7 +38,9 @@ public class ContactarUsuarioServlet extends HttpServlet{
 		
 		Conversacion conversacion = new Conversacion();
 		conversacion.setUser(autor);
+		conversacion.setNombre(pensamiento.getText());
 		conversacion.setToken(userToken);
+		conversacion.setIdContactado(autor.getID());
 		conversacion.setId(todasConversaciones.size() + 1);
 		
 		ConversacionDAOImplementation.getInstance().createConversacion(conversacion);
@@ -46,11 +48,13 @@ public class ContactarUsuarioServlet extends HttpServlet{
 		req.getSession().setAttribute("user", user);
 		
 		
-		HttpSession session = req.getSession(true);
+		HttpSession session = req.getSession();
 		session.setAttribute("autorToken", autor.getToken());
 		session.setAttribute("userToken", userToken);
 		session.setAttribute("conversacionId", conversacion.getId());
-		resp.sendRedirect("ChatServlet");
+		String s = "ChatServlet?conversacionId="+conversacion.getId()+"&tokenUser="+autor.getToken();
+		session.setAttribute("cargaChat", s);
+		resp.sendRedirect("ChatServlet?conversacionId="+conversacion.getId()+"&tokenUser="+autor.getToken());
 		
 	}
 

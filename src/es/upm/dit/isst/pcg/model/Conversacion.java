@@ -19,6 +19,8 @@ public class Conversacion implements Serializable {
 	@ManyToOne
 	private Usuario user; // Usuario que ha sido contactado
 	private String token; // Usuario que contacta
+	private int idContactado;
+	private String nombre;
 	//private List<String> tokenMsg; // Para identificar quien ha escrito cada mensaje.
 	//private List<String> listMsg; // Lista de mensajes de la conversación.
 
@@ -49,6 +51,22 @@ public class Conversacion implements Serializable {
 	
 	public void setToken(String token) {
 		this.token = token;
+	}
+	
+	public int getIdContactado() {
+		return idContactado;
+	}
+	
+	public void setIdContactado(int id) {
+		this.idContactado = id;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
    

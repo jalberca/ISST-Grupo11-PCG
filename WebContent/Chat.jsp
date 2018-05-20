@@ -11,6 +11,7 @@
 <title>Chat - ThinkingPlace</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="5;${cargaChat}"/>
 <link rel="stylesheet" href="styles/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -61,6 +62,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <!-- Middle Column -->
     <div class="w3-col m12 w3-padding" id="content">
     <div id="sala"><%=sala%></div>
+    ${cargaChat}
     
   <div class="panel-Body w3-light-gray" id="messageBody" style="overflow-y:auto; height:450px">
 <c:forEach items="${mensajes}" var="mensaje">
@@ -85,6 +87,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		        			</c:when>
     						<c:otherwise>
     						<div class="w3-container" style="clear:right">
+    							<p>${msjToken }       ${usrToken }</p>
 								<div class="w3-container w3-card w3-white w3-round w3-margin w3-padding w3-left">
 		       						<span class="w3-left w3-opacity">${mensaje.date }</span>
 		       						<span class="w3-left w3-margin-left">${mensaje.text }</span><br>
@@ -97,9 +100,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
            	</c:forEach>
 </div>
-<form action="ChatServlet" method="post" style="text-align:center">
+<form action="ChatServlet" style="text-align:center">
 <div><p>
     	<input class="w3-input w3-border w3-round-large w3-left" type="text" name="msg" id="msg" style="width:1000px"/>
+    	<input type="hidden" name="conversacionId" value = "${conversacionId}"/>
+    	<input type="hidden" name="userToken" value = "${user.token}"/>
     	<button type="submit" class="w3-btn w3-circle w3-teal w3-left"><i class="material-icons">send</i></button>
 </p></div>
     </form>
@@ -129,47 +134,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 var messageBody = document.getElementById("messageBody");
 messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 </script>
-<script type="text/javascript">
-var estado = document.getElementById("estado");
-var lat = document.getElementById("latitud");
-var log = document.getElementById("longitud");
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setPosition, getError);
-        console.log("hola");
-    } else { 
-    	alert("ERROR\nPor favor, acepte el uso de la geolocalización y recarge la página");
-    }
-
-function setPosition(position, error) {
-	console.log("wey: " + position.coords.latitude);
-	
-    lat.value = position.coords.latitude;
-    log.value = position.coords.longitude;
-    estado.value = 0;
-    console.log(lat);
-    console.log(lat.value);
-    console.log(estado.value);
-}
-
-function getError(error){
-	switch(error.code) {
-    case error.PERMISSION_DENIED:
-    	estado.value=1;
-        break;
-    case error.POSITION_UNAVAILABLE:
-    	status.value=2;
-        break;
-    case error.TIMEOUT:
-    	status.value="2";
-        break;
-    case error.UNKNOWN_ERROR:
-    	status.value=2;
-        break;
-	}
-	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
-}
-</script>
 
 
 </body>

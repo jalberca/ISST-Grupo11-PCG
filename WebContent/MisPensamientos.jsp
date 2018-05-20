@@ -89,15 +89,21 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <p>Chats activos:</p>
 
-<c:forEach items="${user.misConversaciones }" var="conversacion">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-	<form action="ChatServlet">
-	<input type="hidden" name="conversacionId" value="${conversacion.id}" />
-	<input type="hidden" name="tokenUser" value="${user.token}" />
-	<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Ir al chat</button></p>
-	</form>
-        <p>${conversacion.token }</p>
-      </div>
+<c:forEach items="${todasConversaciones }" var="conversacion">
+<c:set var="converUserId" scope= "session" value = "${conversacion.user.ID}"/>
+	<c:choose>
+		<c:when test="${ converUserId == user.ID || conversacion.token == user.token }">
+			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+				<p>Conversación asociada al pensamiento:</p>
+				<p>${conversacion.nombre }</p>
+				<form action="ChatServlet">
+					<input type="hidden" name="conversacionId" value="${conversacion.id}" />
+					<input type="hidden" name="tokenUser" value="${user.token}" />
+					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Ir al chat</button></p>
+				</form>
+		    </div>
+		</c:when>
+	</c:choose>
 </c:forEach>
 
 
