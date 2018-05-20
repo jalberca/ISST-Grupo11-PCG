@@ -95,10 +95,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a style="width:30%" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="MisPensamientos.jsp" style="width:70%"  class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
-  <a href="MisPensamientos.jsp" class="w3-bar-item  w3-hide-small w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a href="${cargaMisP }" style="width:70%"  class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a href="${cargaMisP }" class="w3-bar-item  w3-hide-small w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
   <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Filtrar"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Chat"><i class="fa fa-envelope"></i></a>
+  <a href="misChatsServlet" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Chat"><i class="fa fa-envelope"></i></a>
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">Logout</button></form>
  </div>
 </div>
@@ -106,8 +106,8 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <!-- Navbar on small screens -->
 <div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Chat</a>
+  <a href="${cargaMisP }" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
+  <a href="misChatsServlet" class="w3-bar-item w3-button w3-padding-large">Chat</a>
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
 
@@ -324,7 +324,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		          		<input type="hidden" id="estado" name="status" value="">
 		          		<input type="hidden" id="latitud" name="latitud" value="">
 		           		<input type="hidden" id="longitud" name="longitud" value="">
-		           		<input type="hidden" name="email" value="${user.email }">66666666666r666r6666r66r66r6666r66666666666666666666666666666666666
+		           		<input type="hidden" name="email" value="${user.email }">
 						<textarea type="text" name="text" placeholder="¿Qué opinas de este pensamiento?" style="font-size:16px; width:90%;height:100px;"></textarea>
 						<p><button type="submit" class="w3-button w3-theme">Comentar </button></p>
 				</form>
@@ -365,11 +365,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
      <script>
      
+
      function dimensiones(){
      	var a = document.getElementById('der').offsetHeight;
      	document.getElementById("izq").setAttribute("style", "height:"+a+"px;");
 
      }
+
+     function sleep(milliseconds) {
+    	  var start = new Date().getTime();
+    	  for (var i = 0; i < 1e7; i++) {
+    	    if ((new Date().getTime() - start) > milliseconds){
+    	      break;
+    	    }
+    	  }
+    	}
+
      
      function mostrar(enla, etiq) {
     	  obj = document.getElementById(etiq);
@@ -388,9 +399,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	  	var ajax_request = new XMLHttpRequest();
       	  	ajax_request.open( "GET", ajax_url1, false);
       	  	ajax_request.send();
+      	  	sleep(2000);
       	  	var JSON1 =  JSON.parse(ajax_request.response);
-      	    document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
-      	    document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
+      	  	if(JSON1.error_message){
+      	  		return;
+      	  	}
+      	  	console.log(JSON);
+      	  document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
+      	 document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
+
 		}
 	}
      
@@ -488,8 +505,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
+        	  sleep(1500);
         	  var JSON2 =  JSON.parse(ajax_request.response);
           		document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
+
+        	  if(JSON2.error_message){
+        	  		return;
+        	  }
+          	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
             //CÓDIGO PARA IMPRIMIR LA LATITUD Y LONGITUD - MÉTODO PARA SUMARLE LA DISTANCIA QUE ELIJA EL USUARIO Y TENER UN RADIO CIRCULAR ALREDEDOR
@@ -510,6 +533,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	console.log("Markers");
         	console.log(markers.length);
             placeMarkerAndPanTo(e.latLng, map);
+            
           });
         
       }
@@ -551,7 +575,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
+        	  sleep(200);
           var JSON1 =  JSON.parse(ajax_request.response);
+          if(JSON1.error_message){
+    	  		return;
+    	  	}
           console.log(JSON1);
           document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;
           document.getElementById('lat').value = marker.getPosition().lat();
@@ -561,7 +589,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
       
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1TgRemMMBbCkLjA8vCtP5zMZ6chnIQ7c&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY-KHF4-ZwYtyt3JOm2FRsJn8OK0KAVaY&libraries=places&callback=initAutocomplete"
       async defer></script>
 
 <br>

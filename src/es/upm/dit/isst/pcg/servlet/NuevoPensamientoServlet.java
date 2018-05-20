@@ -48,6 +48,7 @@ public class NuevoPensamientoServlet extends HttpServlet{
 			PensamientoDAOImplementation.getInstance().createPensamiento(pensamiento);
 		
 			req.getSession().setAttribute("user", user);
+			
 			resp.sendRedirect(req.getContextPath()+ "/LoginOAuth?email="+user.getEmail()+"&token="+user.getToken());
 		}
 	}

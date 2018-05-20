@@ -27,14 +27,26 @@ import es.upm.dit.isst.pcg.model.MensajeChat;
 public class ChatServlet extends HttpServlet{
 	
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Usuario user = (Usuario) req.getSession().getAttribute("user");
 		String msg = req.getParameter("msg");
 		String sala = (String) getServletContext().getAttribute("sala");
 		
+		
 		HttpSession session = req.getSession();
-		String autorToken = (String) session.getAttribute("autorToken");
-		String userToken = (String) session.getAttribute("userToken");
-		int conversacionId = (int) session.getAttribute("conversacionId");
+		String autorToken = (String) req.getParameter("autorToken");
+		String userToken = (String) req.getParameter("userToken");
+		int conversacionId;
+		if(req.getParameter("conversacionId")==null) {
+			conversacionId = (int) (req.getSession().getAttribute("conversacionId"));
+		} else {
+			conversacionId = Integer.parseInt(req.getParameter("conversacionId"));
+		}
+		
 		
 		List<MensajeChat> todosMensajes = MensajeChatDAOImplementation.getInstance().readMensajes();
 		
@@ -65,14 +77,11 @@ public class ChatServlet extends HttpServlet{
 		req.getSession().setAttribute("user", user);
 		req.getSession().setAttribute("mensajes", todosMensajes);
 		req.getSession().setAttribute("conversacionId", conversacionId);
+		String s = "ChatServlet?conversacionId="+conversacionId+"&tokenUser="+user.getToken();
+		req.getSession().setAttribute("cargaChat", s);
 		System.out.println(todosMensajes);
 		getServletContext().setAttribute("sala", sala);
 		resp.sendRedirect(req.getContextPath() + "/Chat.jsp");
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		processRequest(req, resp);
 	}
 	
 	@Override
