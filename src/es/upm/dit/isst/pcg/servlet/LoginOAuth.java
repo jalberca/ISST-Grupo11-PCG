@@ -40,7 +40,10 @@ public class LoginOAuth extends HttpServlet{
 				req.getSession().setAttribute("pensamientos", todosPensamientos);
 				resp.sendRedirect(req.getContextPath() + "/VistaAdmin.jsp");
 			}else {
+				String s = "LoginOAuth?email="+user.getEmail()+"&token="+user.getToken();
+				req.getSession().setAttribute("cargaMisP", s);
 				resp.sendRedirect(req.getContextPath() + "/MisPensamientos.jsp");
+				
 			}
 		} else {
 			
@@ -70,6 +73,8 @@ public class LoginOAuth extends HttpServlet{
 				req.getSession().setAttribute("pensamientos", todosPensamientos);
 				resp.sendRedirect(req.getContextPath() + "/VistaAdmin.jsp");
 			}else {
+				String s = "LoginOAuth?email="+user.getEmail()+"&token="+user.getToken();
+				req.getSession().setAttribute("cargaMisP", s);
 				resp.sendRedirect(req.getContextPath() + "/MisPensamientos.jsp");
 			}
 			

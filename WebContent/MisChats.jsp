@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -73,41 +73,14 @@ background-size: cover;
 
     	<h2 class="w3-hide-small">Hola, ${user.email }</h2>
     	<h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
-    	<h3></h3>
-		<div class="w3-row-padding">
-	    	<div class="w3-col m12" >
-	         		<div class="w3-card w3-round w3-white">
-		           		<div class="w3-container w3-padding">
-			            	<h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
-			            	<form action="NuevoPensamientoServlet">
-			              		<input type="hidden" id="estado" name="status" value="">			              		<input type="hidden" id="latitud" name="latitud" value="">
-				              	<input type="hidden" id="longitud" name="longitud" value="">
-				           		<input type="hidden" name="email" value="${user.email }">
-								<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:90%;height:100px;"></textarea>
-								<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
-							</form>
-		           		</div>
-	         		</div>
-	        </div>
-		</div>
-		<p>Tus pensamientos son:</p>
-
-		<c:forEach items="${user.misPensamientos }" var="pensamiento">
-			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-		    	<span class="w3-right w3-opacity">${pensamiento.date }</span>
-		        <p>${pensamiento.text }</p>
-		       	<div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
-			</div>
-		</c:forEach>
-
-		<p>Chats activos:</p>
+    	<p>Chats activos:</p>
 		
 <c:forEach items="${todasConversaciones }" var="conversacion">
 <c:set var="converUserId" scope= "session" value = "${conversacion.user.ID}"/>
 	<c:choose>
 		<c:when test="${ converUserId == user.ID || conversacion.token == user.token }">
 			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-				<p>Conversación asociada al pensamiento:</p>
+				<p>Conversaci�n asociada al pensamiento:</p>
 				<p>${conversacion.nombre }</p>
 				<form action="ChatServlet">
 					<input type="hidden" name="conversacionId" value="${conversacion.id}" />
@@ -143,15 +116,12 @@ background-size: cover;
 
 
 <script type="text/javascript">
-var estado = document.getElementById("estado");
-var lat = document.getElementById("latitud");
-var log = document.getElementById("longitud");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setPosition, getError);
         console.log("hola");
     } else { 
-    	alert("ERROR\nPor favor, acepte el uso de la geolocalización y recarge la página");
+    	alert("ERROR\nPor favor, acepte el uso de la geolocalizaci�n y recarge la p�gina");
     }
 
     
@@ -160,39 +130,9 @@ var log = document.getElementById("longitud");
     	document.getElementById("grid").setAttribute("style", "height:"+a+"px;");
     	document.getElementById("contenedor").setAttribute("style", "height:"+a+"px;");
     	document.getElementById("content").setAttribute("style", "height:"+a+"px;");
-    	
-  
     }
     
     
-function setPosition(position, error) {
-	console.log("wey: " + position.coords.latitude);
-	
-    lat.value = position.coords.latitude;
-    log.value = position.coords.longitude;
-    estado.value = 0;
-    console.log(lat);
-    console.log(lat.value);
-    console.log(estado.value);
-}
-
-function getError(error){
-	switch(error.code) {
-    case error.PERMISSION_DENIED:
-    	estado.value=1;
-        break;
-    case error.POSITION_UNAVAILABLE:
-    	status.value=2;
-        break;
-    case error.TIMEOUT:
-    	status.value="2";
-        break;
-    case error.UNKNOWN_ERROR:
-    	status.value=2;
-        break;
-	}
-	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
-}
 //Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
     var x = document.getElementById("navDemo");
