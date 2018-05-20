@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
+<head>
+<link rel="icon" type="image/png" href="images/icono.png"/>
 <title>Mis Pensamientos - ThinkingPlace</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,9 +23,13 @@ background: images/fondo.jpg no-repeat center center fixed;
 -o-background-size: cover;
 background-size: cover;
 }
-
+#titulo{
+	font-family: "Franklin Gothic Heavy";
+	text-align:center;
+	color:white;
+}
       
-      #content{width:80%;position:float;overflow:scroll;
+      #content{width:80%;position:float;overflow:scroll;background-color:rgba(45, 59, 121, 0.5);
 		}
 		#grid{overflow:hidden;
 		}
@@ -33,7 +39,7 @@ background-size: cover;
       
 </style>
 
-
+</head>
 <body class="w3-theme-l5" onLoad="dimensiones()" background="images/fondo.jpg" >
 
 <!-- Navbar -->
@@ -51,7 +57,7 @@ background-size: cover;
 
 <!-- Navbar on small screens -->
 <div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="${cargaMisP }" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
+  <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
   <a href="misChatsServlet" class="w3-bar-item w3-button w3-padding-large">Chat</a>
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
@@ -71,9 +77,9 @@ background-size: cover;
     <!-- Middle Column -->   
 <div class="w3-col m3" id="content" style="height:700px;">
 
-    	<h2 class="w3-hide-small">Hola, ${user.email }</h2>
+    	<h2 class="w3-hide-small" id="titulo">Hola, ${user.email }</h2>
     	<h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
-    	<p>Chats activos:</p>
+    	<h3 id="titulo">Chats activos:</p>
 		
 <c:forEach items="${todasConversaciones }" var="conversacion">
 <c:set var="converUserId" scope= "session" value = "${conversacion.user.ID}"/>

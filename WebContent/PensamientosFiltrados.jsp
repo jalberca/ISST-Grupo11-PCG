@@ -4,6 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html style="width:100%">
+<head>
+<link rel="icon" type="image/png" href="images/icono.png"/>
+
 <title>Pensamientos Filtrados - ThinkingPlace</title>
 <link rel="icon" type="image/png" href="/imágenes/icono.jpeg" />
 
@@ -90,6 +93,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		background-size: 100% 100%;
 		}
 </style>
+</head>
 <body class="w3-theme-l5" onload="dimensiones()" background="images/fondo.jpg" style="width:100%" >
 <!-- Navbar -->
 <div class="w3-top">
@@ -106,7 +110,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <!-- Navbar on small screens -->
 <div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="${cargaMisP }" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
+  <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
   <a href="misChatsServlet" class="w3-bar-item w3-button w3-padding-large">Chat</a>
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
@@ -228,9 +232,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   		<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
 	</form>
 
-	<input   id="pac-input" class="controls w3-hide-small" type="text" placeholder="Search Box">
-	<div  id="map" class="map w3-hide-small"  ></div>
-	<div   id="location" class="location w3-hide-small"></div>
+	<div id="mapa"></div>
 	
 	
 	
@@ -278,10 +280,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		
 		
 <!-- Mapa -->
-		<input   id="pac-input1" class="controls w3-hide-medium w3-hide-large" type="text" placeholder="Search Box">
-		<div  id="map1" class="map w3-hide-medium w3-hide-large"  ></div>
-		<div   id="location1" class="location w3-hide-medium w3-hide-large"></div>
-	</div>
+		<div id="mapa2"></div>
+	
+	
+	
+	
 	
 	
 	
@@ -369,6 +372,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
      function dimensiones(){
      	var a = document.getElementById('der').offsetHeight;
      	document.getElementById("izq").setAttribute("style", "height:"+a+"px;");
+     	if(screen.width>=300){
+     		document.getElementById("mapa").innerHTML("<input   id="pac-input" class="controls w3-hide-small" type="text" placeholder="Search Box">
+ 			<div  id="map" class="map w3-hide-small"  ></div>
+ 			<div   id="location" class="location w3-hide-small"></div>");
+     	}else if(screen.width<300){
+     		document.getElementById("mapa2").innerHTML("<input   id="pac-input" class="controls" type="text" placeholder="Search Box">
+ 			<div  id="map" class="map"  ></div>
+ 			<div   id="location" class="location"></div>");
+     		
+     	}
+     	
+     	
+     	
 
      }
 
@@ -431,11 +447,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           mapTypeId: 'roadmap'
         });
     	 
-    	 var map1 = new google.maps.Map(document.getElementById('map1'), {
-             center: {lat: 40.4167, lng:  -3.70325},
-             zoom: 13,
-             mapTypeId: 'roadmap'
-           });
+    	
 
     	 <c:forEach items="${pensamientos}" var="pensamiento">
 			var position = {lat:${pensamiento.latitud}+Math.random()*Math.pow(10,-4),lng:${pensamiento.longitud}+Math.random()*Math.pow(10,-4)};
@@ -459,6 +471,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		
 		
         // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);

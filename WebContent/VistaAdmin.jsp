@@ -5,12 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html style="height: 100%;">
 <head>
-	<link rel="icon" type="image/png" href="images/icono.png" />
+	<link rel="icon" type="image/png" href="images/icono.png"/>
 	<title>Todos los pensamientos - ThinkingPlace</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="styles/w3.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>

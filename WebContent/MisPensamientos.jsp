@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
+<head>
+<link rel="icon" type="image/png" href="images/icono.png"/>
 <title>Mis Pensamientos - ThinkingPlace</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +46,7 @@ body{
       
 </style>
 
-
+</head>
 <body class="w3-theme-l5" onLoad="dimensiones()" background="images/fondo.jpg" >
 
 <!-- Navbar -->
@@ -62,7 +64,7 @@ body{
 
 <!-- Navbar on small screens -->
 <div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="${cargaMisP }" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
+  <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
   <a href="misChatsServlet" class="w3-bar-item w3-button w3-padding-large">Chat</a>
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>

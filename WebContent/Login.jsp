@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="styles/login/images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="images/icono.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="styles/login/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -39,9 +39,9 @@
 		<div class="container-login100" style="height:100%;">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="background-color:rgb(255, 255, 255,0.7);">
 						<div>
-						<div style="font-size:30px; text-align:center; font-weight:bold">Login</div>
+						<div style="font-size:30px; text-align:center; font-weight:bold;margin-bottom:10px;">Login</div>
 						<div> </div>
-						<img src="images/thinkingplace.png" style="width:350px; height:250px"/>
+						<img src="images/logo.png" style="width:350px; height:250px"/>
 						</div>
 					
 					<div class="text-center w-full p-t-42 p-b-22">
@@ -56,7 +56,7 @@
 							<form action="LoginOAuth">
 								<input type="hidden" name="email" id="Email" value="">
 								<input type="hidden" name="token" id="Token" value="">
-								<button type="submit" style="background-color: orange; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer ">Login</button>
+								<button type="submit" style="background-color: rgb(45, 59, 121); border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; margin: 4px 2px; cursor: pointer ">Login</button>
 							 </form>
 				</div>
 			</div>
