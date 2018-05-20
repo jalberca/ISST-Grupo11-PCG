@@ -22,14 +22,22 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="953660495183-475gp5akjru219a9fltitorfcnssvhns.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+    body{
+	background: images/fondo.jpg no-repeat center center fixed;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+    </style>
 
 </head>
-<body>
+<body  background="images/fondo.jpg">
   
 	
 	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+		<div class="container-login100" style="height:100%;">
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30" style="background-color:rgb(255, 255, 255,0.7);">
 						<div>
 						<div style="font-size:30px; text-align:center; font-weight:bold">Login</div>
 						<div> </div>
@@ -38,11 +46,11 @@
 					
 					<div class="text-center w-full p-t-42 p-b-22">
 						<span class="txt1">
-							Autentiquese con Google:
+							<p style="color:black;">Autentiquese con Google:</p>
 						</span>
 					<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="text-align:center; margin-left:110px"></div>
 
-						<span class="txt1" id="texto">
+						<span class="txt1" id="texto" style="color:black;">
 						
 						</span>
 							<form action="LoginOAuth">

@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html>
+<html style="width:100%">
 <title>Pensamientos Filtrados - ThinkingPlace</title>
-<link rel="icon" type="image/png" href="/imágenes/mifavicon.png" />
+<link rel="icon" type="image/png" href="/imágenes/icono.jpeg" />
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,16 +21,23 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
+      #map,map1 {
         height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
-      .map {
+      .map{
         height: 100%;
         margin-top:10px; 
         width:90%; 
         text-align:center;
-        padding: 200px; /*OJO IMPORTANTE*/
+        padding: 200px; 
+      }
+      .map1 {
+        height: 100%;
+        margin-top:10px; 
+        width:90%; 
+        text-align:center;
+        padding: 200px; 
       }
       .controls {
         margin-top: 10px;
@@ -38,11 +45,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         border-radius: 2px 0 0 2px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
-        /*height: 32px;*/
+        height: 32px;
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
-      #pac-input {
+      #pac-input,pac-input1 {
         background-color: #fff;
         font-family: Roboto;
         font-size: 15px;
@@ -71,8 +78,19 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       #target {
         width: 345px;
       }
+      #izq{
+      position:float;
+      overflow:scroll;
+      width:50%;
+      }
+      body{
+		background: images/fondo.jpg no-repeat center center fixed;
+		-webkit-background-size:100% 100%;
+		-moz-background-size: 100% 100%;
+		background-size: 100% 100%;
+		}
 </style>
-<body class="w3-theme-l5" onload="posicionActual();">
+<body class="w3-theme-l5" onload="dimensiones()" background="images/fondo.jpg" style="width:100%" >
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
@@ -94,9 +112,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </div>
 
 
-<!-- Paginas grandes -->
-<div class="w3-container w3-content w3-hide-small" style="margin-top:4%;width:50%;height:800px;float:left;" >
-<h2 style="text-align:center;">Los pensamientos de esta zona son:</h2>
+<!-- Contenedor principal para paginas grandes max-width:1400px-->
+<div class="w3-container " id="contenedor" style="position:relative;margin-left:2%;margin-right:2%;margin-bottom:2%;margin-top:51px;">  
+
+
+
+
+
+    
+    <!-- Left Column -->
+    <h2 style="text-align:left;font-family:Franklin Gothic Heavy" class="w3-hide-small">Los pensamientos de esta zona son:</h2>
+    <div class="w3-col m3" id="izq" style="height:500px;">
+      
+
+<div class="w3-container w3-content w3-hide-small"  style="">
+
+
 
 	<c:forEach items="${pensamientos}" var="pensamiento">
 		<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -124,10 +155,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        <form action="ContactarUsuarioServlet">
 	        	<input type="hidden" name="pensamientoId" value="${pensamiento.id }">
 	        	<input type="hidden" name="userToken" value="${user.token }">
-	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-commenting"></i>  Contactar usuario</button>
+	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-commenting"></i>  Contactar</button>
 	        </form>
 
-			<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar1(this, ${pensamiento.id }); return false" /> <i class="fa fa-comments-o"></i> Desplegar comentarios </a>
+			<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar1(this, ${pensamiento.id }); return false" /> <i class="fa fa-comments-o"></i> Comentarios </a>
 
 	        </tr>
 	        </table>
@@ -163,9 +194,30 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
            	</div>
 	      </div>
 	</c:forEach>
-</div>
+	</div>
 
-<div class="w3-hide-small" style="margin-top:4%; width:50%;height:100%;float:right; ">
+
+
+
+
+
+    <!-- End Left Column -->
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m3" >
+
+    
+    <!-- End Middle Column -->
+    </div>
+    
+    <div class="w3-col m3" id="der"style="width:50%;">
+    <!-- Right Column -->
+    
+    
+    
+    
+    <div class="w3-hide-small" style="margin-top:4%; width:100%;height:100%;float:center; ">
 	<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
   		<table align="center" >
   			<tr><th>Latitud:</th><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"></th></tr>
@@ -179,7 +231,30 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	<input   id="pac-input" class="controls w3-hide-small" type="text" placeholder="Search Box">
 	<div  id="map" class="map w3-hide-small"  ></div>
 	<div   id="location" class="location w3-hide-small"></div>
+	
+	
+	
+	
+	
+	
+	
+    <!-- End Right Column -->
+    </div>
+
+  
+<!-- End Page Container -->
 </div>
+
+</div>
+
+
+
+
+
+
+
+
+
 
 
 <!-- Paginas pequeñas -->
@@ -199,17 +274,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   			</table>
   			<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
 		</form>
+		
+		
+		
 <!-- Mapa -->
-		<input   id="pac-input" class="controls w3-hide-medium w3-hide-large" type="text" placeholder="Search Box">
-		<div  id="map" class="map w3-hide-medium w3-hide-large"  ></div>
-		<div   id="location" class="location w3-hide-medium w3-hide-large"></div>
+		<input   id="pac-input1" class="controls w3-hide-medium w3-hide-large" type="text" placeholder="Search Box">
+		<div  id="map1" class="map w3-hide-medium w3-hide-large"  ></div>
+		<div   id="location1" class="location w3-hide-medium w3-hide-large"></div>
 	</div>
 	
 	
 	
 	<!-- Mostrar pensamientos -->
 	<div class="w3-container w3-content w3-hide-medium w3-hide-large" style="margin-left:5%;margin-rigth:5%; width:90%;" >
-	<h3 style="text-align:center;">Los pensamientos de esta zona son:</h3>
+	<h3 style="text-align:center;font-family:Franklin Gothic Heavy">Los pensamientos de esta zona son:</h3>
 
 	<c:forEach items="${pensamientos}" var="pensamiento">
 		<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -280,11 +358,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16" style="margin-top:100px;">
-  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+<footer class="w3-container w3-theme-d3 " style="height:50px;">
+  <h5 class="w3-hide-small">ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+  <h5 class="w3-hide-large w3-hide-medium">ThinkingPlace - 2018. </h5>
 </footer>
 
      <script>
+     
+     function dimensiones(){
+     	var a = document.getElementById('der').offsetHeight;
+     	document.getElementById("izq").setAttribute("style", "height:"+a+"px;");
+
+     }
      
      function mostrar(enla, etiq) {
     	  obj = document.getElementById(etiq);
@@ -293,7 +378,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
      function mostrar1(enla, etiq) {
    	  obj = document.getElementById(etiq);
    	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
-   	  enla.innerHTML = (enla.innerHTML == '<i class="fa fa-comments-o"></i> Cerrar comentarios') ? '<i class="fa fa-comments-o"></i> Desplegar comentarios' : '<i class="fa fa-comments-o"></i> Cerrar comentarios';
+   	  enla.innerHTML = (enla.innerHTML == '<i class="fa fa-comments-o"></i> Cerrar comentarios') ? '<i class="fa fa-comments-o"></i> Comentarios' : '<i class="fa fa-comments-o"></i> Cerrar comentarios';
    	}
      
      
@@ -328,12 +413,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           zoom: 13,
           mapTypeId: 'roadmap'
         });
+    	 
+    	 var map1 = new google.maps.Map(document.getElementById('map1'), {
+             center: {lat: 40.4167, lng:  -3.70325},
+             zoom: 13,
+             mapTypeId: 'roadmap'
+           });
 
     	 <c:forEach items="${pensamientos}" var="pensamiento">
 			var position = {lat:${pensamiento.latitud}+Math.random()*Math.pow(10,-4),lng:${pensamiento.longitud}+Math.random()*Math.pow(10,-4)};
 			var texto = "${pensamiento.text}";
 			console.log(position);
-			console.log(${pensamiento.id});
+
 			var marcador = new google.maps.Marker({
 			  	  position: position,
 			   	  map: map,
@@ -393,13 +484,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
               position: place.geometry.location
             }));
           markers.forEach(function(marker) {
-        	  var ajax_url ='http://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&sensor=true_or_false';
+			var ajax_url ='http://maps.googleapis.com/maps/api/geocode/json?latlng='+marker.getPosition().lat()+','+marker.getPosition().lng()+'&sensor=true_or_false';
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
         	  var JSON2 =  JSON.parse(ajax_request.response);
-        	  console.log("yiiiiiiiiieyeueo");
-          	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
+          		document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
             //CÓDIGO PARA IMPRIMIR LA LATITUD Y LONGITUD - MÉTODO PARA SUMARLE LA DISTANCIA QUE ELIJA EL USUARIO Y TENER UN RADIO CIRCULAR ALREDEDOR
@@ -424,7 +514,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         
       }
 		 
-     
         var infoWindow = new google.maps.InfoWindow({map: map});
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -462,7 +551,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
-        	  console.log("carajo");
           var JSON1 =  JSON.parse(ajax_request.response);
           console.log(JSON1);
           document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;

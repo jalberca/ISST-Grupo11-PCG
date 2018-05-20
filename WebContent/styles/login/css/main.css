@@ -50,7 +50,7 @@
 }
 
 body, html {
-  height: 100%;
+  
   font-family: Poppins-Regular, sans-serif;
 }
 
@@ -184,11 +184,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #0250c5;
-  background: -webkit-linear-gradient(bottom, red, orange, yellow);
-  background: -o-linear-gradient(bottom, red, orange, yellow);
-  background: -moz-linear-gradient(bottom, red, orange, yellow);
-  background: linear-gradient(bottom, red, orange, yellow);
+  
   position: relative;
   z-index: 1;
 }

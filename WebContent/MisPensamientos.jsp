@@ -13,22 +13,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-		body{
-background: images/fondo.jpg no-repeat center center fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+html,body,h1,h2,h3,h5 {font-family: "Open Sans", sans-serif}
+body{
+	background: images/fondo.jpg no-repeat center center fixed;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+#titulo{
+	font-family: "Franklin Gothic Heavy";
+}
+#content{
+	width:80%;
+	position:float;
+	overflow:scroll;
+	background-color:rgba(45, 59, 121, 0.5);
+	
 }
 
-      
-      #content{width:80%;position:float;overflow:scroll;
-		}
-		#grid{overflow:hidden;
-		}
-		#contenedor{width:100%;margin-top:51px;position:relative;
-		}
+#grid{
+	overflow:hidden;
+}
+
+#contenedor{
+	width:100%;
+	margin-top:51px;
+	position:relative;
+}
       
       
 </style>
@@ -71,9 +82,8 @@ background-size: cover;
     <!-- Middle Column -->
     <div class="w3-col m3" id="content" style="height:700px;">
    
-    
 
-    	<h2 class="w3-hide-small">Hola, ${user.email }</h2>
+    	<h2 class="w3-hide-small"id="titulo" style="text-align:center;color:white;"><strong>Hola, ${user.email }</strong></h2>
     	<h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
     	<h3></h3>
 		<div class="w3-row-padding">
@@ -92,28 +102,18 @@ background-size: cover;
 	         		</div>
 	        </div>
 		</div>
-		<p>Tus pensamientos son:</p>
+
+
+		<h4 id="titulo"style="text-align:center;color:white;"><strong>Tus pensamientos son:</strong></h4>
 
 		<c:forEach items="${user.misPensamientos }" var="pensamiento">
 			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
 		    	<span class="w3-right w3-opacity">${pensamiento.date }</span>
 		        <p>${pensamiento.text }</p>
-		       	<div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
+		       	<div style="margin-bottom:10px">Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
 			</div>
 		</c:forEach>
 
-		<p>Chats activos:</p>
-		
-		<c:forEach items="${user.misConversaciones }" var="conversacion">
-			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-				<form action="ChatServlet">
-					<input type="hidden" name="conversacionId" value="${conversacion.id}" />
-					<input type="hidden" name="tokenUser" value="${user.token}" />
-					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Ir al chat</button></p>
-				</form>
-		        <p>${conversacion.token }</p>
-			</div>
-		</c:forEach>
     <!-- End Middle Column -->
     </div>
     
@@ -156,8 +156,6 @@ var log = document.getElementById("longitud");
     	document.getElementById("grid").setAttribute("style", "height:"+a+"px;");
     	document.getElementById("contenedor").setAttribute("style", "height:"+a+"px;");
     	document.getElementById("content").setAttribute("style", "height:"+a+"px;");
-    	
-  
     }
     
     
