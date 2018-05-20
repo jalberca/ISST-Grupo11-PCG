@@ -8,87 +8,100 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+		body{
+background: images/fondo.jpg no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+      
+      #content{width:80%;position:float;overflow:scroll;
+		}
+		#grid{overflow:hidden;
+		}
+		#contenedor{width:100%;margin-top:51px;position:relative;
+		}
+      
+      
 </style>
 
-<body class="w3-theme-l5" onLoad="">
+
+<body class="w3-theme-l5" onLoad="dimensiones()" background="images/fondo.jpg" >
 
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="MisPensamientos.jsp" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a style="width:30%" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="MisPensamientos.jsp" style="width:70%"  class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a href="MisPensamientos.jsp" class="w3-bar-item  w3-hide-small w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
   <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Filtrar"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Ajustes"><i class="fa fa-user"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Chat"><i class="fa fa-envelope"></i></a>
-  
-  <a href="Login.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">Logout</a>
+  <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">Logout</button></form>
  </div>
 </div>
 
+
 <!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Menu</a>
-  <a href="filter.html" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Ajustes</a>
+<div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large">Chat</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Notificaciones</a>
-  <a href="login.html" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+  <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
 
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<!-- Contenedor principal para paginas grandes max-width:1400px-->
+<div class="w3-container w3-content " id="contenedor" style="height:700px;" >  
+
   <!-- The Grid -->
-  <div class="w3-row">
+  <div class="w3-row" id="grid" style="height:700px;">
     <!-- Left Column -->
-    <div class="w3-col m3">
+    <div class="w3-col m3" style="width:10%;">
       <!--  -->
-      
+      <p></p>
     <!-- End Left Column -->
     </div>
     
-    <!-- Middle Column -->
-    <div class="w3-col m7" id="content">
-    <h2>Hola, ${user.email }</h2>
-    <h3></h3>
-	<div class="w3-row-padding">
-	        <div class="w3-col m12">
-	          <div class="w3-card w3-round w3-white">
-	            <div class="w3-container w3-padding">
-	              <h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
-	              
-	              <form action="NuevoPensamientoServlet">
-	              		<input type="hidden" id="estado" name="status" value="">
-	              		<input type="hidden" id="latitud" name="latitud" value="">
-	              		<input type="hidden" id="longitud" name="longitud" value="">
-	              		<input type="hidden" name="email" value="${user.email }">
-						<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:500px;height:100px;"></textarea>
-						<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
-					</form>
-	
-	
-	            </div>
-	          </div>
+    <!-- Middle Column -->   
+<div class="w3-col m3" id="content" style="height:700px;">
+
+    	<h2 class="w3-hide-small">Hola, ${user.email }</h2>
+    	<h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
+    	<h3></h3>
+		<div class="w3-row-padding">
+	    	<div class="w3-col m12" >
+	         		<div class="w3-card w3-round w3-white">
+		           		<div class="w3-container w3-padding">
+			            	<h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
+			            	<form action="NuevoPensamientoServlet">
+			              		<input type="hidden" id="estado" name="status" value="">			              		<input type="hidden" id="latitud" name="latitud" value="">
+				              	<input type="hidden" id="longitud" name="longitud" value="">
+				           		<input type="hidden" name="email" value="${user.email }">
+								<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:90%;height:100px;"></textarea>
+								<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
+							</form>
+		           		</div>
+	         		</div>
 	        </div>
-	      </div>
+		</div>
+		<p>Tus pensamientos son:</p>
 
+		<c:forEach items="${user.misPensamientos }" var="pensamiento">
+			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		    	<span class="w3-right w3-opacity">${pensamiento.date }</span>
+		        <p>${pensamiento.text }</p>
+		       	<div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
+			</div>
+		</c:forEach>
 
-<p>Tus pensamientos son:</p>
-
-<c:forEach items="${user.misPensamientos }" var="pensamiento">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${pensamiento.date }</span>
-        <p>${pensamiento.text }</p>
-       <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
-      </div>
-</c:forEach>
-
-<p>Chats activos:</p>
-
+		<p>Chats activos:</p>
+		
 <c:forEach items="${todasConversaciones }" var="conversacion">
 <c:set var="converUserId" scope= "session" value = "${conversacion.user.ID}"/>
 	<c:choose>
@@ -105,13 +118,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		</c:when>
 	</c:choose>
 </c:forEach>
-
-
     <!-- End Middle Column -->
     </div>
     
+    <div class="w3-col m3" style="width:10%;">
     <!-- Right Column -->
-    
+    <p></p>
     <!-- End Right Column -->
     </div>
     
@@ -122,14 +134,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </div>
 
 
+
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+<footer class="w3-container w3-theme-d3 " style="height:50px;">
+  <h5 class="w3-hide-small">ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+  <h5 class="w3-hide-large w3-hide-medium">ThinkingPlace - 2018. </h5>
 </footer>
 
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
 
 <script type="text/javascript">
 var estado = document.getElementById("estado");
@@ -143,6 +154,17 @@ var log = document.getElementById("longitud");
     	alert("ERROR\nPor favor, acepte el uso de la geolocalización y recarge la página");
     }
 
+    
+    function dimensiones(){
+    	var a = screen.height-193;
+    	document.getElementById("grid").setAttribute("style", "height:"+a+"px;");
+    	document.getElementById("contenedor").setAttribute("style", "height:"+a+"px;");
+    	document.getElementById("content").setAttribute("style", "height:"+a+"px;");
+    	
+  
+    }
+    
+    
 function setPosition(position, error) {
 	console.log("wey: " + position.coords.latitude);
 	
@@ -170,6 +192,15 @@ function getError(error){
         break;
 	}
 	alert("ERROR\nPor favor, inténtelo de nuevo más tarde");
+}
+//Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
 }
 </script>
 

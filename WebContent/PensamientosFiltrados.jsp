@@ -10,12 +10,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-
+ footer {
+             position:relative ;
+             clear: both;          
+        }
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -27,8 +30,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         margin-top:10px; 
         width:90%; 
         text-align:center;
-        
-        padding: 200px;
+        padding: 200px; /*OJO IMPORTANTE*/
       }
       .controls {
         margin-top: 10px;
@@ -36,7 +38,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         border-radius: 2px 0 0 2px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
-        height: 32px;
+        /*height: 32px;*/
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       }
@@ -71,32 +73,29 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       }
 </style>
 <body class="w3-theme-l5" onload="posicionActual();">
-
-
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="MisPensamientos.jsp" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a style="width:30%" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="MisPensamientos.jsp" style="width:70%"  class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
+  <a href="MisPensamientos.jsp" class="w3-bar-item  w3-hide-small w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ThinkingPlace</a>
   <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Filtrar"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Ajustes"><i class="fa fa-user"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Chat"><i class="fa fa-envelope"></i></a>
-  <a href="Login.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Logout">Logout</a>
+  <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">Logout</button></form>
  </div>
 </div>
 
+
 <!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="MisPensamientos.jsp" class="w3-bar-item w3-button w3-padding-large">Menu</a>
+<div id="navDemo" style="margin-top:51px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <a href="PensamientosFiltrados.jsp" class="w3-bar-item w3-button w3-padding-large">Filtrar</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Ajustes</a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large">Chat</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Notificaciones</a>
-  <a href="Login.jsp" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+  <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
 
-<!-- Page" Container -->
-<div class="w3-container w3-content" style="margin-top:4%;width:50%;height:800px;float:left;" >
+
+<!-- Paginas grandes -->
+<div class="w3-container w3-content w3-hide-small" style="margin-top:4%;width:50%;height:800px;float:left;" >
 <h2 style="text-align:center;">Los pensamientos de esta zona son:</h2>
 
 	<c:forEach items="${pensamientos}" var="pensamiento">
@@ -128,7 +127,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-commenting"></i>  Contactar usuario</button>
 	        </form>
 
-			<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar(this, ${pensamiento.id }); return false" />Desplegar comentarios</a>
+			<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar1(this, ${pensamiento.id }); return false" /> <i class="fa fa-comments-o"></i> Desplegar comentarios </a>
 
 	        </tr>
 	        </table>
@@ -141,14 +140,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 	          		<input type="hidden" id="latitud" name="latitud" value="">
 	           		<input type="hidden" id="longitud" name="longitud" value="">
 	           		<input type="hidden" name="email" value="${user.email }">
-					<textarea type="text" name="text" placeholder="¿Qué opinas de este pensamiento?" style="font-size:16px; width:500px;height:100px;"></textarea>
+					<textarea type="text" name="text" placeholder="¿Qué opinas de este pensamiento?" style="font-size:16px; width:90%;height:100px;"></textarea>
 					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Comentar</button></p>
 				</form>
             <c:forEach items="${comentarios}" var="comentario">
                 <c:set var = "pensid" scope = "session" value = "${pensamiento.id}"/>
             <c:set var="comentpens" value="${comentario.pensamiento}"/>
-<%-- 			<c:out value="${pensid}"/><p>
-				<c:out value="${comentpens}"/><p> --%>
+
             	<c:choose>
     				<c:when test="${pensid == comentpens }">
 						<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -165,34 +163,127 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
            	</div>
 	      </div>
 	</c:forEach>
+</div>
+
+<div class="w3-hide-small" style="margin-top:4%; width:50%;height:100%;float:right; ">
+	<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
+  		<table align="center" >
+  			<tr><th>Latitud:</th><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"></th></tr>
+  			<tr><th>Longitud:</th><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th></tr>
+  			<tr><th>Código Postal:</th><th><input id="cp" type="number" name="CP" placeholder="Código Postal"></th></tr>
+  			<tr><th>Radio:</th><th><input type="text" name="radio" placeholder="Radio (metros)"></th></tr>
+  		</table>
+  		<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
+	</form>
+
+	<input   id="pac-input" class="controls w3-hide-small" type="text" placeholder="Search Box">
+	<div  id="map" class="map w3-hide-small"  ></div>
+	<div   id="location" class="location w3-hide-small"></div>
+</div>
+
+
+<!-- Paginas pequeñas -->
+<div class="w3-hide-medium w3-hide-large">
+	<!-- Formulario de datos de ubicacion -->
+	<div class="w3-hide-medium w3-hide-large" style="margin-top:20%; margin-left:5%;margin-rigth:5%; width:90%;">
+		<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="text-align: center;">
+	  		<table align="center" >
+	  			<tr><th>Latitud:</th></tr>
+	  			<tr><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"><th></tr>
+	  			<tr><th>Longitud:</th></tr>
+	  			<tr><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th></tr>
+				<tr><th>Código Postal:</th></tr>
+  				<tr><th><input id="cp" type="number" name="CP" placeholder="Código Postal"></th></tr>
+  				<tr><th>Radio:</th></tr>
+  				<tr><th><input type="text" name="radio" placeholder="Radio (metros)"></th></tr>
+  			</table>
+  			<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
+		</form>
+<!-- Mapa -->
+		<input   id="pac-input" class="controls w3-hide-medium w3-hide-large" type="text" placeholder="Search Box">
+		<div  id="map" class="map w3-hide-medium w3-hide-large"  ></div>
+		<div   id="location" class="location w3-hide-medium w3-hide-large"></div>
+	</div>
+	
+	
+	
+	<!-- Mostrar pensamientos -->
+	<div class="w3-container w3-content w3-hide-medium w3-hide-large" style="margin-left:5%;margin-rigth:5%; width:90%;" >
+	<h3 style="text-align:center;">Los pensamientos de esta zona son:</h3>
+
+	<c:forEach items="${pensamientos}" var="pensamiento">
+		<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+	        <span class="w3-right w3-opacity">${pensamiento.date }</span>
+	        <p>${pensamiento.text }</p>
+	        <div>
+	        	<table>
+	        		<tr>
+				        <form action="VotarPositivo">
+				        	<input type="hidden" name="cargar" value="${cargar }">
+				        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+				        	<button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> </button>
+				        </form>
+				        <form action="VotarNegativo">
+				        	<input type="hidden" name="cargar" value="${cargar }">
+				        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+				        	<button type="submit" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-down"></i></button>
+				        </form>
+				        
+				        <form action="ReportarServlet">
+				        	<input type="hidden" name="cargar" value="${cargar }">
+				        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+				        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i></button>
+				        </form>
+
+						<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar(this, ${pensamiento.id +9000}); return false" /><i class="fa fa-comments-o"></i></a>
+	        		</tr>
+	        	</table>
+	        </div>
+
+	        <div id="${pensamiento.id+9000}" style="display:none">
+		        <form action="NuevoComentarioServlet">
+		        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
+		          		<input type="hidden" id="estado" name="status" value="">
+		          		<input type="hidden" id="latitud" name="latitud" value="">
+		           		<input type="hidden" id="longitud" name="longitud" value="">
+		           		<input type="hidden" name="email" value="${user.email }">
+						<textarea type="text" name="text" placeholder="¿Qué opinas de este pensamiento?" style="font-size:16px; width:90%;height:100px;"></textarea>
+						<p><button type="submit" class="w3-button w3-theme">Comentar </button></p>
+				</form>
+	            <c:forEach items="${comentarios}" var="comentario">
+	                <c:set var = "pensid" scope = "session" value = "${pensamiento.id}"/>
+	            <c:set var="comentpens" value="${comentario.pensamiento}"/>
+	            	<c:choose>
+	    				<c:when test="${pensid == comentpens }">
+							<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+			       				<span class="w3-right w3-opacity">${comentario.date }</span>
+			       				<p>${comentario.text }</p>
+			       			
+			       			</div>
+			        	</c:when>
+	    				<c:otherwise>
+	    				</c:otherwise>
+					</c:choose>
+	
+	           	</c:forEach>
+           	</div>
+	      </div>
+	</c:forEach>
+</div>
 
 
 </div>
 
-<div style="margin-top:4%; width:50%;height:100%;float:right; ">
-<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
-  <table align="center" >
-  <tr>  
-  <th>Latitud:</th><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"></th>
-  </tr>
-  <tr>
-  <th>Longitud:</th><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th>
-  </tr>
-  <tr>
-  <th>Código Postal:</th><th><input id="cp" type="number" name="CP" placeholder="Código Postal"></th>
-  </tr>
-  <tr>
-  <th>Radio:</th><th><input type="text" name="radio" placeholder="Radio (metros)"></th>
-  </tr>
-  </table>
-  <button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
-</form>
 
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="map" class="map"  ></div>
-<div id="location" class="location"></div>
 
-</div>
+
+
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16" style="margin-top:100px;">
+  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+</footer>
+
      <script>
      
      function sleep(milliseconds) {
@@ -207,8 +298,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
      function mostrar(enla, etiq) {
     	  obj = document.getElementById(etiq);
     	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
-    	  enla.innerHTML = (enla.innerHTML == 'Cerrar comentarios') ? 'Desplegar comentarios' : 'Cerrar comentarios';
     	}
+     function mostrar1(enla, etiq) {
+   	  obj = document.getElementById(etiq);
+   	  obj.style.display = (obj.style.display == 'block') ? 'none' : 'block';
+   	  enla.innerHTML = (enla.innerHTML == '<i class="fa fa-comments-o"></i> Cerrar comentarios') ? '<i class="fa fa-comments-o"></i> Desplegar comentarios' : '<i class="fa fa-comments-o"></i> Cerrar comentarios';
+   	}
      
      
 	function escribir(){
@@ -225,6 +320,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	  	console.log(JSON);
       	  document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
       	 document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
+
 		}
 	}
      
@@ -318,9 +414,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  ajax_request.send();
         	  sleep(1500);
         	  var JSON2 =  JSON.parse(ajax_request.response);
+
         	  if(JSON2.error_message){
         	  		return;
-        	  	}
+        	  }
           	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
@@ -385,6 +482,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  var ajax_request = new XMLHttpRequest();
         	  ajax_request.open( "GET", ajax_url, false);
         	  ajax_request.send();
+<<<<<<< HEAD
         	  sleep(200);
           var JSON1 =  JSON.parse(ajax_request.response);
           if(JSON1.error_message){
@@ -399,6 +497,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
       
     </script>
+<<<<<<< HEAD
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY-KHF4-ZwYtyt3JOm2FRsJn8OK0KAVaY&libraries=places&callback=initAutocomplete"
       async defer></script>
 
