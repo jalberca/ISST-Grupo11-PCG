@@ -8,70 +8,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-orange.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+		body{
+background: images/fondo.jpg no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
 
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      .map {
-        height: 100%;
-        margin-top:10px; 
-        width:90%; 
-        text-align:center;
-        
-        padding: 200px;
-      }
-      .controls {
-        margin-top: 10px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 300px;
-      }
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
-      .pac-container {
-        font-family: Roboto;
-      }
-      #type-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
-      }
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-      #target {
-        width: 345px;
-      }
-</style>
+      
+      #content{width:80%;position:float;overflow:scroll;
+		}
+		#grid{overflow:hidden;
+		}
+		#contenedor{width:100%;margin-top:51px;position:relative;
+		}
+      
+      
 </style>
 
-<body class="w3-theme-l5" onLoad="">
+
+<body class="w3-theme-l5" onLoad="dimensiones()" background="images/fondo.jpg" >
 
 <!-- Navbar -->
 <div class="w3-top">
@@ -93,61 +56,70 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   <form action="LogoutServlet" title="Logout"><button type="submit" class="w3-bar-item w3-button w3-padding-large w3-button">Logout</button></form>  
 </div>
 
-<!-- Contenedor principal para paginas grandes -->
-<div class="w3-container w3-content " style="max-width:1400px;margin-top:80px">  
+<!-- Contenedor principal para paginas grandes max-width:1400px-->
+<div class="w3-container w3-content " id="contenedor" style="height:700px;" >  
 
   <!-- The Grid -->
-  <div class="w3-row">
+  <div class="w3-row" id="grid" style="height:700px;">
     <!-- Left Column -->
-    <div class="w3-col m3">
+    <div class="w3-col m3" style="width:10%;">
       <!--  -->
-      
+      <p></p>
     <!-- End Left Column -->
     </div>
     
     <!-- Middle Column -->
-    <div class="w3-col m7" id="content">
-    <h2 class="w3-hide-small">Hola, ${user.email }</h2>
-    <h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
-    <h3></h3>
-	<div class="w3-row-padding">
-	        <div class="w3-col m12">
-	          <div class="w3-card w3-round w3-white">
-	            <div class="w3-container w3-padding">
-	              <h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
-	              
-	              <form action="NuevoPensamientoServlet">
-	              		<input type="hidden" id="estado" name="status" value="">
-	              		<input type="hidden" id="latitud" name="latitud" value="">
-	              		<input type="hidden" id="longitud" name="longitud" value="">
-	              		<input type="hidden" name="email" value="${user.email }">
-						<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:90%;height:100px;"></textarea>
-						<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
-					</form>
-	
-	
-	            </div>
-	          </div>
+    <div class="w3-col m3" id="content" style="height:700px;">
+   
+    
+
+    	<h2 class="w3-hide-small">Hola, ${user.email }</h2>
+    	<h4 style="text-align:center"class="w3-hide-medium w3-hide-large">Hola, ${user.email }</h4>
+    	<h3></h3>
+		<div class="w3-row-padding">
+	    	<div class="w3-col m12" >
+	         		<div class="w3-card w3-round w3-white">
+		           		<div class="w3-container w3-padding">
+			            	<h6 class="w3-opacity">¿Tienes algo que contar? Pulsa aquí para publicar un nuevo pensamiento</h6>
+			            	<form action="NuevoPensamientoServlet">
+			              		<input type="hidden" id="estado" name="status" value="">			              		<input type="hidden" id="latitud" name="latitud" value="">
+				              	<input type="hidden" id="longitud" name="longitud" value="">
+				           		<input type="hidden" name="email" value="${user.email }">
+								<textarea type="text" name="text" placeholder="¿Qué estás pensando?" style="font-size:16px; width:90%;height:100px;"></textarea>
+								<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Publicar</button></p>
+							</form>
+		           		</div>
+	         		</div>
 	        </div>
-	      </div>
+		</div>
+		<p>Tus pensamientos son:</p>
 
+		<c:forEach items="${user.misPensamientos }" var="pensamiento">
+			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+		    	<span class="w3-right w3-opacity">${pensamiento.date }</span>
+		        <p>${pensamiento.text }</p>
+		       	<div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
+			</div>
+		</c:forEach>
 
-<p>Tus pensamientos son:</p>
-
-<c:forEach items="${user.misPensamientos }" var="pensamiento">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <span class="w3-right w3-opacity">${pensamiento.date }</span>
-        <p>${pensamiento.text }</p>
-       <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
-      </div>
-</c:forEach>
-
-
+		<p>Chats activos:</p>
+		
+		<c:forEach items="${user.misConversaciones }" var="conversacion">
+			<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+				<form action="ChatServlet">
+					<input type="hidden" name="conversacionId" value="${conversacion.id}" />
+					<input type="hidden" name="tokenUser" value="${user.token}" />
+					<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Ir al chat</button></p>
+				</form>
+		        <p>${conversacion.token }</p>
+			</div>
+		</c:forEach>
     <!-- End Middle Column -->
     </div>
     
+    <div class="w3-col m3" style="width:10%;">
     <!-- Right Column -->
-    
+    <p></p>
     <!-- End Right Column -->
     </div>
     
@@ -159,34 +131,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+<footer class="w3-container w3-theme-d3 " style="height:50px;">
+  <h5 class="w3-hide-small">ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+  <h5 class="w3-hide-large w3-hide-medium">ThinkingPlace - 2018. </h5>
 </footer>
 
 
@@ -202,6 +150,17 @@ var log = document.getElementById("longitud");
     	alert("ERROR\nPor favor, acepte el uso de la geolocalización y recarge la página");
     }
 
+    
+    function dimensiones(){
+    	var a = screen.height-225;
+    	document.getElementById("grid").setAttribute("style", "height:"+a+"px;");
+    	document.getElementById("contenedor").setAttribute("style", "height:"+a+"px;");
+    	document.getElementById("content").setAttribute("style", "height:"+a+"px;");
+    	
+  
+    }
+    
+    
 function setPosition(position, error) {
 	console.log("wey: " + position.coords.latitude);
 	

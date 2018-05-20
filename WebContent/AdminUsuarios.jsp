@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<html>
+<html style="height: 100%;">
 <title>Todos los pensamientos - ThinkingPlace</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,27 +15,27 @@
 html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </style>
 
-<body class="w3-theme-l5" onLoad="AdminUsuariosServlet">
+<body class="w3-theme-l5" onLoad="AdminUsuariosServlet" style="height: 100%;">
 
 <!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a style="width:50%" class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="VistaAdmin.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Usuarios">Administrar Usuarios</a>
-  <a href="VistaAdmin.jsp" style="width:50%" class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large" title="Administrar Usuarios"><i class="fa fa-home w3-margin-right"></i></a>					
-  <a href="AdminUsuarios.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Pensamientos">Administrar Pensamientos</a>
+  <a href="VistaAdmin.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Pensamientos">Administrar Pensamientos</a>
+  <a href="VistaAdmin.jsp" style="width:50%" class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large" title="Administrar Pensamientos"><i class="fa fa-home w3-margin-right"></i></a>					
+  <a href="AdminUsuarios.jsp" style="width:40%"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" title="Administrar Usuarios">Administrar Usuarios</a>
   <form action="LogoutServlet" title="Logout"><button type="submit" style="width:20%" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">Logout</button></form> </div>
 </div>
 
 
 <!-- Navbar on small screens -->
 <div id="navDemo" style="margin-top:40px" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="AdminUsuarios.jsp"  class="w3-bar-item w3-button w3-padding-large" title="Administrar Pensamientos">Administrar Pensamientos</a>
+  <a href="AdminUsuarios.jsp"  class="w3-bar-item w3-button w3-padding-large" title="Administrar Usuarios">Administrar Usuarios</a>
   <form action="LogoutServlet" class="w3-bar-item w3-button w3-padding-large" title="Logout"><button type="submit" class="w3-button">Logout</button></form> </div>
 </div>
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:4%; height: 100%;">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -51,9 +51,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <p>Aquí están todos los usuarios registrados hasta el momento: </p>
 
-<form action="AdminUsuariosServlet">
-<p><button type="submit" class="w3-button w3-theme"><i class="fa fa-trash-alt"></i>  Comentar</button></p>
-</form>
+
 
 <c:forEach items="${usuarios}" var="usuario">
 	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
