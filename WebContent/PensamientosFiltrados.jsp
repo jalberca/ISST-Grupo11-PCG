@@ -120,13 +120,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <div class="w3-container " id="contenedor" style="position:relative;margin-left:2%;margin-right:2%;margin-bottom:2%;margin-top:51px;">  
 
 
-
-
-
-    
     <!-- Left Column -->
     <h2 style="text-align:left;font-family:Franklin Gothic Heavy" class="w3-hide-small">Los pensamientos de esta zona son:</h2>
-    <div class="w3-col m3" id="izq" style="height:500px;">
+    <div class="w3-col m3" id="izq" style="height:10px;">
       
 
 <div class="w3-container w3-content w3-hide-small"  style="">
@@ -215,14 +211,13 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     <!-- End Middle Column -->
     </div>
     
-    <div class="w3-col m3" id="der"style="width:50%;">
+    <div class="w3-col m3" id="der" style="width:50%;"> <!-- OJO CUIDADO, PARA PAGINAS GRANDES, ESTE STYLE TIENE QUE TENER UN WIDTH DE 50% PARA PEQUEÑAS, TIENE QUE SER DEL 100%-->
     <!-- Right Column -->
     
     
     
-    
-    <div class="w3-hide-small" style="margin-top:4%; width:100%;height:100%;float:center; ">
-	<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
+    <div style="margin-top:4%; width:100%;height:100%;float:center; ">
+	<form class="w3-card w3-round w3-white w3-hide-small" action="PensamientosFiltradosServlet" style="width:90%;text-align: center;margin-right:10px; margin-top:10px;">
   		<table align="center" >
   			<tr><th>Latitud:</th><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"></th></tr>
   			<tr><th>Longitud:</th><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th></tr>
@@ -231,65 +226,40 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
   		</table>
   		<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
 	</form>
-
-	<div id="mapa"></div>
 	
-	
-	
-	
-	
-	
-	
-    <!-- End Right Column -->
-    </div>
-
-  
-<!-- End Page Container -->
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-<!-- Paginas pequeñas -->
-<div class="w3-hide-medium w3-hide-large">
-	<!-- Formulario de datos de ubicacion -->
-	<div class="w3-hide-medium w3-hide-large" style="margin-top:20%; margin-left:5%;margin-rigth:5%; width:90%;">
-		<form class="w3-card w3-round w3-white" action="PensamientosFiltradosServlet" style="text-align: center;">
+	<!-- Formulario para paginas pequeñas -->
+	<form class="w3-card w3-round w3-white w3-hide-medium w3-hide-large" action="PensamientosFiltradosServlet" style="text-align: center;">
 	  		<table align="center" >
 	  			<tr><th>Latitud:</th></tr>
-	  			<tr><th><input id="lat" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"><th></tr>
+	  			<tr><th><input id="lat1" type="text" name="latitud" placeholder="Latitud(grados)" style="margin-top:10px;"><th></tr>
 	  			<tr><th>Longitud:</th></tr>
-	  			<tr><th><input id="long" type="text" name="longitud" placeholder="Longitud(grados)"></th></tr>
+	  			<tr><th><input id="long1" type="text" name="longitud" placeholder="Longitud(grados)"></th></tr>
 				<tr><th>Código Postal:</th></tr>
-  				<tr><th><input id="cp" type="number" name="CP" placeholder="Código Postal"></th></tr>
+  				<tr><th><input id="cp1" type="number" name="CP" placeholder="Código Postal"></th></tr>
   				<tr><th>Radio:</th></tr>
-  				<tr><th><input type="text" name="radio" placeholder="Radio (metros)"></th></tr>
+  				<tr><th><input type="text1" name="radio" placeholder="Radio (metros)"></th></tr>
   			</table>
   			<button type="submit" style="margin-top:10px;margin-bottom:10px" onclick='return escribir()'>Filtrar</button>  
 		</form>
-		
-		
-		
+
+
 <!-- Mapa -->
-		<div id="mapa2"></div>
+<!-- Mapa -->
+<!-- Mapa -->
+<!-- Mapa -->
+<!-- Mapa -->
+	<input   id="pac-input" class="controls" type="text" placeholder="Search Box">
+ 	<div  id="map" class="map"  ></div>
+ 	<div   id="location" class="location"></div>
+<!-- Mapa -->
+<!-- Mapa -->
+<!-- Mapa -->
+<!-- Mapa -->
+<!-- Mapa --> 	
 	
 	
 	
-	
-	
-	
-	
-	<!-- Mostrar pensamientos -->
-	<div class="w3-container w3-content w3-hide-medium w3-hide-large" style="margin-left:5%;margin-rigth:5%; width:90%;" >
+	<div id="peq"class="w3-hide-medium w3-hide-large" style="margin-left:5%;margin-rigth:5%; width:90%;" >
 	<h3 style="text-align:center;font-family:Franklin Gothic Heavy">Los pensamientos de esta zona son:</h3>
 
 	<c:forEach items="${pensamientos}" var="pensamiento">
@@ -350,10 +320,32 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
            	</div>
 	      </div>
 	</c:forEach>
+	
+	
+	
+	
+	
+	
+	
+	
+    <!-- End Right Column -->
+    </div>
+
+  
+<!-- End Page Container -->
+</div>
+
 </div>
 
 
-</div>
+
+
+
+
+
+
+
+
 
 
 
@@ -370,18 +362,20 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
      
 
      function dimensiones(){
-     	var a = document.getElementById('der').offsetHeight;
-     	document.getElementById("izq").setAttribute("style", "height:"+a+"px;");
-     	if(screen.width>=300){
-     		document.getElementById("mapa").innerHTML("<input   id="pac-input" class="controls w3-hide-small" type="text" placeholder="Search Box">
- 			<div  id="map" class="map w3-hide-small"  ></div>
- 			<div   id="location" class="location w3-hide-small"></div>");
-     	}else if(screen.width<300){
-     		document.getElementById("mapa2").innerHTML("<input   id="pac-input" class="controls" type="text" placeholder="Search Box">
- 			<div  id="map" class="map"  ></div>
- 			<div   id="location" class="location"></div>");
-     		
-     	}
+    	 if(window.innerWidth>596){
+      		var a = document.getElementById('der').offsetHeight;
+      		document.getElementById("izq").setAttribute("style", "height:"+a+"px;");
+      		document.getElementById("der").setAttribute("style", "width:50%;");
+      	}else{
+      		document.getElementById("der").setAttribute("style", "width:100%;");
+     	 	return;
+      	}
+    	 
+    	 
+    	 
+     	/*var a = document.getElementById('der').offsetHeight;
+     	document.getElementById("izq").setAttribute("style", "height:"+a+"px;");*/
+     
      	
      	
      	
@@ -423,6 +417,21 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       	  	console.log(JSON);
       	  document.getElementById('lat').value  = JSON1.results[0].geometry.location.lat;
       	 document.getElementById('long').value  = JSON1.results[0].geometry.location.lng;
+		}
+		
+		if((document.getElementById('lat1').value === null || document.getElementById('long1').value === null) && document.getElementById('cp1').value !== null){
+			var ajax_url ='http://maps.googleapis.com/maps/api/geocode/json?address='+ document.getElementById('cp1').value +'&region=ES&sensor=false';
+      	  	var ajax_request = new XMLHttpRequest();
+      	  	ajax_request.open( "GET", ajax_url1, false);
+      	  	ajax_request.send();
+      	  	sleep(2000);
+      	  	var JSON1 =  JSON.parse(ajax_request.response);
+      	  	if(JSON1.error_message){
+      	  		return;
+      	  	}
+      	  	console.log(JSON);
+      	  document.getElementById('lat1').value  = JSON1.results[0].geometry.location.lat;
+      	 document.getElementById('long1').value  = JSON1.results[0].geometry.location.lng;
 
 		}
 	}
@@ -472,7 +481,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 		
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
-        var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         // Bias the SearchBox results towards current map's viewport.
@@ -521,13 +529,16 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
         	  sleep(1500);
         	  var JSON2 =  JSON.parse(ajax_request.response);
           		document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
-
+          		document.getElementById('cp1').value = JSON2.results[0].address_components[6].long_name;
         	  if(JSON2.error_message){
         	  		return;
         	  }
           	document.getElementById('cp').value = JSON2.results[0].address_components[6].long_name;
        	  document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
+      	document.getElementById('cp1').value = JSON2.results[0].address_components[6].long_name;
+     	  document.getElementById('lat1').value = marker.getPosition().lat();
+        document.getElementById('long1').value = marker.getPosition().lng();
             //CÓDIGO PARA IMPRIMIR LA LATITUD Y LONGITUD - MÉTODO PARA SUMARLE LA DISTANCIA QUE ELIJA EL USUARIO Y TENER UN RADIO CIRCULAR ALREDEDOR
           });
             if (place.geometry.viewport) {
@@ -597,6 +608,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           document.getElementById('cp').value = JSON1.results[0].address_components[6].long_name;
           document.getElementById('lat').value = marker.getPosition().lat();
           document.getElementById('long').value = marker.getPosition().lng();
+          document.getElementById('cp1').value = JSON1.results[0].address_components[6].long_name;
+          document.getElementById('lat1').value = marker.getPosition().lat();
+          document.getElementById('long1').value = marker.getPosition().lng();
     	  map.panTo(latLng);
     	}
 

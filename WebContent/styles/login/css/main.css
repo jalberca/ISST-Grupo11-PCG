@@ -48,8 +48,16 @@
   padding: 0px; 
   box-sizing: border-box;
 }
-
-body, html {
+body{
+	background-image: url('../images/fondo.jpg');
+	background-repeat: no-repeat;
+  	background-size: cover;
+  	background-position: center;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+body {
   
   font-family: Poppins-Regular, sans-serif;
   height:100%;

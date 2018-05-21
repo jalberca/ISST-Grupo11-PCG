@@ -23,16 +23,11 @@
     <meta name="google-signin-client_id" content="953660495183-475gp5akjru219a9fltitorfcnssvhns.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <style>
-    body{
-	background: images/fondo.jpg no-repeat center center fixed;
-	-webkit-background-size: 100% 100%;
-	-moz-background-size: 100% 100%;
-	background-size: 100% 100%;
-}
+   
     </style>
 
 </head>
-<body  background="images/fondo.jpg">
+<body>
   
 	
 	<div class="limiter">
