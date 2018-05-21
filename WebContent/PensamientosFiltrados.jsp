@@ -285,6 +285,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 				        	<input type="hidden" name="pensamientoID" value="${pensamiento.id }">
 				        	<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-ban"></i></button>
 				        </form>
+				        <form action="ContactarUsuarioServlet">
+	        				<input type="hidden" name="pensamientoId" value="${pensamiento.id }">
+	        				<input type="hidden" name="userToken" value="${user.token }">
+	        				<button type="submit" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-commenting"></i></button>
+	        			</form>
 
 						<a href="#" class="w3-button w3-theme-d1 w3-margin-bottom" onclick="mostrar(this, ${pensamiento.id +9000}); return false" /><i class="fa fa-comments-o"></i></a>
 	        		</tr>

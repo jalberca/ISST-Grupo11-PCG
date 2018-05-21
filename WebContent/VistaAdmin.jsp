@@ -15,9 +15,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 		html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+		#content{
+	position:float;
+	overflow:scroll;
+	
+}
+
+#grid{
+	overflow:hidden;
+}
+
+#contenedor{
+	position:relative;
+}
 	</style>
 </head>
-<body class="w3-theme-l5" onLoad="" style="height: 100%;">
+<body class="w3-theme-l5" onLoad="dimensiones()" style="height: 100%;">
 
 
 <!-- Navbar -->
@@ -40,7 +53,7 @@
 
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:4%; height: 100%;">    
+<div class="w3-container w3-content" id="contenedor" style="max-width:1400px;margin-top:4%; height: 100%;">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -51,7 +64,7 @@
     </div>
     
     <!-- Middle Column -->
-    <div class="w3-col m7" id="content">
+    <div class="w3-col m7" id="content" style="height:500px">
     <h2>Hola, Administrador</h2>
     <h3></h3>
 
@@ -66,7 +79,7 @@
        <div>Positivos: ${pensamiento.votosPositivo } Negativos: ${pensamiento.votosNegativo }</div>
        <form action="BanearPensamientoServlet">
        	<input type="hidden" name="id" value="${pensamiento.id }">
-       	<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>ELIMINAR PENSAMIENTO</button>
+       	 <button type="submit" style = "float: right" class="w3-button w3-theme"><i class="fa fa-pencil"></i> ELIMINAR PENSAMIENTO</button>
        </form></p>
       </div>
 </c:forEach>
@@ -91,13 +104,19 @@
 
 
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+<footer class="w3-container w3-theme-d3 " style="height:50px;">
+  <h5 class="w3-hide-small">ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+  <h5 class="w3-hide-large w3-hide-medium">ThinkingPlace - 2018. </h5>
 </footer>
 
 
 
 <script type="text/javascript">
+function dimensiones(){
+ 		var a = window.innerHeight;
+ 		document.getElementById("content").setAttribute("style", "height:"+a+"px;");
+
+ 	}
 
 //Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {

@@ -54,18 +54,15 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 <p>Aquí están todos los usuarios registrados hasta el momento: </p>
 
-
-
 <c:forEach items="${usuarios}" var="usuario">
-	<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-       <p> El usuario con ID: ${usuario.ID } tiene ${usuario.reports} reportes.
-       <form action="BanearUsuarioServlet">
-       	<input type="hidden" name="id" value="${usuario.ID }">
-       	<button type="submit" class="w3-button w3-theme"><i class="fa fa-trash-alt"></i>ELIMINAR USUARIO</button>
-       </form></p>
-      </div>
+  <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+    <p style = "float:left">El usuario con ID: ${usuario.ID} tiene ${usuario.reports} reportes.</p>
+    <form action="BanearUsuarioServlet">
+      <input type="hidden" name="id" value="${usuario.ID}">
+      <button type="submit" style = "float: right" class="w3-button w3-theme"><i class="fa fa-trash-alt"></i>ELIMINAR USUARIO</button>
+    </form>
+  </div>
 </c:forEach>
-
 
 
     <!-- End Middle Column -->
@@ -87,8 +84,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 
 
 <!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+<footer class="w3-container w3-theme-d3 " style="height:50px;">
+  <h5 class="w3-hide-small">ThinkingPlace - 2018. Proyecto para la asignatura ISST, Pensamiento Colectivo Geolocalizado.</h5>
+  <h5 class="w3-hide-large w3-hide-medium">ThinkingPlace - 2018. </h5>
 </footer>
 
 
